@@ -1,0 +1,37 @@
+[deploy.github_pages]
+branch = "main"
+owner = "a7garden"
+repo = "a7garden.github.io"
+
+[extensions]
+enabled = [
+    "profile",
+    "blog",
+    "projects",
+    "links",
+]
+
+[lobby]
+default_mode = "grid"
+
+[[mounts]]
+description = "Selected work & experiments"
+id = "portfolio"
+path = "portfolio"
+source = "../portfolio/dist"
+title_en = "Portfolio"
+title_ko = "포트폴리오"
+
+[server]
+data_dir = "data"
+host = "127.0.0.1"
+port = 8787
+
+[site]
+base_url = "https://a7garden.github.io"
+default_lang = "ko"
+languages = [
+    "ko",
+    "en",
+]
+name = "a7garden"

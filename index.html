@@ -1,26 +1,14 @@
-<!doctype html>
-<html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="/theme-boot.js" data-context="public"></script>
-    <meta name="oxibuilder-theme" content="paper" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Relative on purpose: the static artifact resolves them against <base href>. -->
-    <link rel="icon" type="image/png" href="favicon-32.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Noto+Serif+KR:wght@400;500;600;700&display=swap"
-    />
-    <title>Oxibuilder</title>
-    <script type="module" crossorigin src="assets/main-5zgX8kTU.js"></script>
-    <link rel="modulepreload" crossorigin href="assets/global-CZXE2Tgx.js">
-    <link rel="modulepreload" crossorigin href="assets/ProfileView-54vAtsMQ.js">
-    <link rel="stylesheet" crossorigin href="assets/global-BFLo-yKf.css">
-  <base href="/"></head>
-  <body>
-    <div id="root"></div>
-  </body>
-</html>
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>a7garden</title><meta name="description" content="a7garden — personal space"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><!-- Fonts: SUIT + SUITE via jsDelivr (DESIGN.md §4.2) --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/variable/woff2/SUIT-Variable.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css"><!-- Prevent dark-mode flash: apply before paint --><script>
+      (function () {
+        const stored = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+        if (stored === "dark" || (!stored && prefersDark)) {
+          document.documentElement.classList.add("dark");
+        }
+        requestAnimationFrame(() =>
+          document.documentElement.classList.add("theme-ready"),
+        );
+      })();
+    </script><link rel="stylesheet" href="/_astro/BaseLayout.CpuwvCDR.css"></head><body><main class="flex min-h-screen flex-col items-center justify-center px-6"><!-- Identity --><header class="mb-16 text-center"><h1 class="text-5xl font-bold tracking-tight text-text sm:text-6xl" style="font-family: var(--font-display)">a7garden</h1><p class="mt-3 text-sm text-text-muted">personal space</p></header><!-- Route cards --><nav class="grid w-full max-w-2xl grid-cols-1 gap-4 sm:grid-cols-2" aria-label="주요 페이지"><a href="/portfolio/" class="group rounded-lg border border-border p-8 transition-colors hover:border-border-strong hover:bg-surface-sunken"><h2 class="text-2xl font-semibold text-text" style="font-family: var(--font-display)">Portfolio</h2><p class="mt-2 text-sm text-text-muted">작업 기록</p></a><a href="/movies/" class="group rounded-lg border border-border p-8 transition-colors hover:border-border-strong hover:bg-surface-sunken"><h2 class="text-2xl font-semibold text-text" style="font-family: var(--font-display)">Movies</h2><p class="mt-2 text-sm text-text-muted">영화 기록</p></a></nav><!-- Theme toggle --><button id="theme-toggle" class="mt-16 text-xs text-text-muted transition-colors hover:text-text" aria-label="테마 전환">toggle theme</button></main></body></html><script type="module">document.getElementById(`theme-toggle`)?.addEventListener(`click`,()=>{let e=document.documentElement.classList.toggle(`dark`);localStorage.setItem(`theme`,e?`dark`:`light`)});</script>

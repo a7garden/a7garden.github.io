@@ -1,0 +1,3 @@
+# Build outputs and per-site data — never commit to the Pages repo
+# (the Pages branch is populated by `oxibuilder deploy` with built out/ only).
+data/
