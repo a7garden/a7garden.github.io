@@ -21,6 +21,9 @@ jobs:
       - uses: actions/checkout@v4
       - id: configure
         uses: actions/configure-pages@v5
+      - name: Strip repo metadata from artifact
+        run: rm -rf .git .github
+        shell: bash
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .
