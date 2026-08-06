@@ -23,6 +23,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Remove non-deploy files
+        run: |
+          rm -rf .git data oxibuilder.toml README.md .gitignore
+          # Remove any hidden dirs that aren't needed
+          find . -name ".DS_Store" -delete
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
