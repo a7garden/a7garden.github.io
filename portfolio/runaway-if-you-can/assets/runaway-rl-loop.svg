@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 520" role="img" aria-label="지속적 강화학습 루프 다이어그램: 플레이 → 경로 누적 → 하위 경로 추출 → 데이터 추가 → 이어 학습 → 모델 업데이트 → 추격 시스템 갱신 순환">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#7c5cff"/>
+    </marker>
+    <marker id="arrDim" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#a4adb8"/>
+    </marker>
+    <linearGradient id="playGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1b2127"/>
+      <stop offset="100%" stop-color="#252c34"/>
+    </linearGradient>
+    <linearGradient id="trainGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#553fcc"/>
+      <stop offset="100%" stop-color="#7c5cff"/>
+    </linearGradient>
+  </defs>
+
+  <style>
+    .title { font: 600 13px -apple-system, "Pretendard", "Inter", system-ui, sans-serif; fill: #e6e8eb; letter-spacing: .04em; text-transform: uppercase; }
+    .sub { font: 500 11px -apple-system, "Pretendard", "Inter", system-ui, sans-serif; fill: #a4adb8; }
+    .step-num { font: 700 12px -apple-system, "Pretendard", "Inter", system-ui, sans-serif; fill: #7c5cff; }
+    .step-name { font: 600 14px -apple-system, "Pretendard", "Inter", system-ui, sans-serif; fill: #e6e8eb; }
+    .step-desc { font: 12px -apple-system, "Pretendard", "Inter", system-ui, sans-serif; fill: #a4adb8; }
+    .step-desc strong { fill: #e6e8eb; font-weight: 600; }
+    .cycle { font: 500 11px -apple-system, "Pretendard", "Inter", system-ui, sans-serif; fill: #6c7682; letter-spacing: .08em; text-transform: uppercase; }
+    .center { font: 600 12px -apple-system, "Pretendard", "Inter", system-ui, sans-serif; fill: #7c5cff; letter-spacing: .04em; text-transform: uppercase; }
+  </style>
+
+  <!-- Top label -->
+  <text x="380" y="24" class="center" text-anchor="middle">한 회차의 학습 사이클 · Step 1 → Step 5</text>
+
+  <!-- Center hub: Model -->
+  <g transform="translate(380,260)">
+    <circle r="62" fill="#0f1216" stroke="#7c5cff" stroke-width="1.5"/>
+    <circle r="50" fill="none" stroke="#553fcc" stroke-width="1" stroke-dasharray="2 3" opacity=".6"/>
+    <text y="-12" text-anchor="middle" class="title">DQN Model</text>
+    <text y="6" text-anchor="middle" class="step-name">w_t</text>
+    <text y="22" text-anchor="middle" class="sub">.pt · 가중치</text>
+  </g>
+
+  <!-- Step 1: Play (top-left) -->
+  <g transform="translate(60,80)">
+    <rect width="200" height="78" rx="10" fill="url(#playGrad)" stroke="#252c34"/>
+    <text x="14" y="22" class="step-num">STEP 1</text>
+    <text x="14" y="40" class="step-name">플레이어 플레이</text>
+    <text x="14" y="58" class="step-desc"><tspan>도둑 이동 경로</tspan></text>
+    <text x="14" y="72" class="step-desc"><tspan>데이터 누적 (1 episode)</tspan></text>
+  </g>
+
+  <!-- Step 2: Select worst (top-right) -->
+  <g transform="translate(500,80)">
+    <rect width="200" height="78" rx="10" fill="#14181d" stroke="#252c34"/>
+    <text x="14" y="22" class="step-num">STEP 2</text>
+    <text x="14" y="40" class="step-name">하위 3+개 경로 추출</text>
+    <text x="14" y="58" class="step-desc">경찰에 <tspan font-weight="600" fill="#e6e8eb">가장 적게 잡힌</tspan> 경로</text>
+    <text x="14" y="72" class="step-desc">= 플레이어가 선호할 다음 회차 경로</text>
+  </g>
+
+  <!-- Step 3: Append (bottom-left) -->
+  <g transform="translate(60,362)">
+    <rect width="200" height="78" rx="10" fill="#14181d" stroke="#252c34"/>
+    <text x="14" y="22" class="step-num">STEP 3</text>
+    <text x="14" y="40" class="step-name">학습 데이터 추가</text>
+    <text x="14" y="58" class="step-desc">Replay Buffer에 <tspan font-weight="600" fill="#e6e8eb">append</tspan></text>
+    <text x="14" y="72" class="step-desc">이전 데이터 폐기 없음</text>
+  </g>
+
+  <!-- Step 4: Continue training (bottom-right) -->
+  <g transform="translate(500,362)">
+    <rect width="200" height="78" rx="10" fill="#14181d" stroke="#252c34"/>
+    <text x="14" y="22" class="step-num">STEP 4</text>
+    <text x="14" y="40" class="step-name">이어 학습 (Continual)</text>
+    <text x="14" y="58" class="step-desc"><tspan font-weight="600" fill="#e6e8eb">w_t → w_{t+1}</tspan> (cold start 회피)</text>
+    <text x="14" y="72" class="step-desc">Replay + Target Net + ε decay</text>
+  </g>
+
+  <!-- Step 5: Update (center-bottom) -->
+  <g transform="translate(290,442)">
+    <rect width="180" height="58" rx="10" fill="url(#trainGrad)" opacity=".15"/>
+    <rect width="180" height="58" rx="10" fill="none" stroke="#7c5cff" stroke-width="1"/>
+    <text x="90" y="22" class="step-num" text-anchor="middle">STEP 5</text>
+    <text x="90" y="40" class="step-name" text-anchor="middle">추격 시스템 갱신</text>
+    <text x="90" y="54" class="step-desc" text-anchor="middle">ONNX 정책 리로드 → 다음 회차</text>
+  </g>
+
+  <!-- Cycle arrows (clockwise: Step 1 → Step 2 → Step 4 → Step 3 → Step 1) -->
+  <!-- 1 -> 2 (top) -->
+  <path d="M 260 119 L 500 119" stroke="#7c5cff" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <text x="380" y="111" class="cycle" text-anchor="middle">extract</text>
+
+  <!-- 2 -> 4 (right) -->
+  <path d="M 600 158 L 600 362" stroke="#7c5cff" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <text x="616" y="264" class="cycle" transform="rotate(90 616 264)" text-anchor="middle">continue training</text>
+
+  <!-- 4 -> 3 (bottom) -->
+  <path d="M 500 401 L 260 401" stroke="#7c5cff" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <text x="380" y="427" class="cycle" text-anchor="middle">reload</text>
+
+  <!-- 3 -> 1 (left) -->
+  <path d="M 160 362 L 160 158" stroke="#7c5cff" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <text x="146" y="264" class="cycle" transform="rotate(-90 146 264)" text-anchor="middle">next episode</text>
+
+  <!-- Hub connections (dim) -->
+  <!-- Model <- Step 4 -->
+  <path d="M 540 401 Q 460 360 420 295" stroke="#a4adb8" stroke-width="1" fill="none" stroke-dasharray="4 4" marker-end="url(#arrDim)"/>
+  <text x="478" y="372" class="sub">train</text>
+
+  <!-- Model -> Step 5 -->
+  <path d="M 380 322 L 380 442" stroke="#7c5cff" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <text x="392" y="382" class="sub" fill="#7c5cff">export ONNX</text>
+
+  <!-- Step 5 -> Step 1 (long arc back to start of next cycle) -->
+  <path d="M 290 471 Q 80 471 80 158" stroke="#a4adb8" stroke-width="1" fill="none" stroke-dasharray="4 4" marker-end="url(#arrDim)"/>
+  <text x="40" y="320" class="sub" transform="rotate(-90 40 320)" text-anchor="middle">next cycle</text>
+</svg>

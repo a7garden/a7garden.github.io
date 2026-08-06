@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" font-family="-apple-system, system-ui, sans-serif">
+  <style>
+    .box { fill: #14181d; stroke: #252c34; stroke-width: 1; rx: 8; }
+    .src { fill: rgba(124, 92, 255, 0.12); stroke: #7c5cff; stroke-width: 1.5; rx: 8; }
+    .arrow { fill: none; stroke: #7c5cff; stroke-width: 1.5; }
+    .label { fill: #e6e8eb; font-size: 14px; font-weight: 600; }
+    .sub { fill: #a4adb8; font-size: 11px; }
+  </style>
+
+  <rect class="src" x="40" y="60" width="180" height="100" rx="8"/>
+  <text class="label" x="130" y="90" text-anchor="middle">plain .md files</text>
+  <text class="sub" x="130" y="110" text-anchor="middle">TOML frontmatter</text>
+  <text class="sub" x="130" y="128" text-anchor="middle">grep · cat · git</text>
+  <text class="sub" x="130" y="146" text-anchor="middle" style="fill:#7c5cff; font-weight:600;">source of truth</text>
+
+  <rect class="box" x="300" y="60" width="180" height="100" rx="8"/>
+  <text class="label" x="390" y="90" text-anchor="middle">redb metadata</text>
+  <text class="sub" x="390" y="110" text-anchor="middle">id · hash · tags</text>
+  <text class="sub" x="390" y="128" text-anchor="middle">category · updated_at</text>
+  <text class="sub" x="390" y="146" text-anchor="middle">pure Rust · no C deps</text>
+
+  <rect class="box" x="560" y="60" width="180" height="100" rx="8"/>
+  <text class="label" x="650" y="90" text-anchor="middle">tantivy BM25</text>
+  <text class="sub" x="650" y="110" text-anchor="middle">full-text index</text>
+  <text class="sub" x="650" y="128" text-anchor="middle">body + tags</text>
+  <text class="sub" x="650" y="146" text-anchor="middle">pure Rust</text>
+
+  <path class="arrow" d="M 220 110 L 300 110" marker-end="url(#a)"/>
+  <path class="arrow" d="M 480 110 L 560 110" marker-end="url(#a)"/>
+  <text class="sub" x="260" y="105" text-anchor="middle" style="fill:#7c5cff;">cache</text>
+  <text class="sub" x="520" y="105" text-anchor="middle" style="fill:#7c5cff;">cache</text>
+
+  <text class="sub" x="400" y="200" text-anchor="middle">oximemo reindex → 두 캐시 재구축 (어느 시점이든 가능)</text>
+
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#7c5cff"/>
+    </marker>
+  </defs>
+</svg>

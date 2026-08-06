@@ -1,0 +1,86 @@
+<!DOCTYPE html><html lang="ko"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><title>How Many Blood — 헌혈량 통계 / 날씨 기반 예측</title><meta name="description" content="혈액정보 시스템의 차트 데이터를 시간별로 수집하고, 기상청 날씨와 결합해 헌혈량을 분석·예측하는 데이터 플랫폼."><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/variable/woff2/SUIT-Variable.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/geist-mono@5/index.css"><link rel="stylesheet" href="/_astro/index.DB04cqhc.css"></head> <body>  <header class="site-header"> <a class="back" href="/red-cross-works/">← Red Cross Works</a> </header> <main> <section class="hero"> <p class="eyebrow">Data Platform · Time-Series · Weather-based ML</p> <h1>How Many Blood</h1> <p class="lede">
+대한적십자사 <strong>혈액정보 시스템</strong>(biss.bloodinfo.net)의 차트 데이터를
+<strong>매시간 자동 수집</strong>해 시간대·요일·지역별 헌혈 패턴을 시각화하고,
+        기상청 예보와 결합해 <strong>D+7 일일 헌혈량을 예측</strong>하는 데이터 플랫폼.
+</p> <div class="meta"> <dl> <dt>역할</dt><dd>개인 프로젝트 — 데이터 수집·저장·분석·예측·시각화 전 과정 단독 설계/구현</dd> <dt>프론트</dt><dd>React 18 · TypeScript · Vite · Styled Components · Recharts · React Query · Zustand · i18next</dd> <dt>백엔드</dt><dd>Firebase Functions · Firestore · Firebase Hosting · Cloud Scheduler</dd> <dt>데이터 소스</dt><dd>혈액정보 시스템 (개인/단체 17개 시도별 시간별) + 기상청 ASOS + 중기예보</dd> <dt>ML 모델</dt><dd>다변량 선형회귀 (기온/강수/적설/요일) · 주 1회 재학습</dd> </dl> </div> </section> <section class="section"> <h2>1. 화면</h2> <p>대시보드는 일별 헌혈 추이 + 7일 이동평균, 지역별 합계, 시간대 피크를 한 화면에 묶는다.</p> <figure class="figure"> <img src="/how-many-blood/assets/dashboard.png" alt="How Many Blood 대시보드 — 4,451명 합계, 17개 시도 헌혈 통계 표"> <figcaption>메인 대시보드 — 90일치 mock 데이터로 앱 동작. 개인 2,628 / 단체 1,823 / 합계 4,451, 17개 시도 표</figcaption> </figure> <p>분석/예측 탭은 시간×요일 히트맵, 시간대 평균, 7일 예측, 인사이트 카드를 함께 보여준다.</p> <figure class="figure"> <img src="/how-many-blood/assets/analysis.png" alt="How Many Blood 통계 분석 — 인사이트 카드, AI 헌혈량 예측 (기상 데이터 반영) 90일치 시계열 차트"> <figcaption>통계 분석 — 90일치 mock 데이터 기반. 주간 추세, 가장 활발한 요일, AI 예측 차트</figcaption> </figure> <figure class="figure"> <img src="/how-many-blood/assets/daily.png" alt="How Many Blood 일별 통계 — 일별 헌혈 추이 + 7일 이동평균 + 요일별 평균"> <figcaption>일별 통계 — 일별 헌혈 추이 + 7일 이동평균, 요일별 평균, 월별 평균. 시계열 라인 + 막대</figcaption> </figure> <figure class="figure"> <img src="/how-many-blood/assets/hourly.png" alt="How Many Blood 시간대 통계 — 11개 시간대 막대 + 요일×시간대 히트맵"> <figcaption>시간대 통계 — 11개 시간대(10~20시) 막대, 7요일 × 11시간 히트맵. 평일 오후 피크 + 일요일 10시 일부 지점 미운영 패턴</figcaption> </figure> </section> <section class="section"> <h2>2. 문제</h2> <p>
+혈액정보 시스템은 차트 형태로 시각화된 데이터만 제공한다 — 다운로드 가능한 표가 없다.
+        의료진이 캠페인/배차/인력 운영 결정을 내려야 하는데,
+<em>"요일·시간·날씨에 따라 헌혈량이 어떻게 움직이는가"</em>를 정량적으로 보는 도구가 없었다.
+        그래서 수집·정규화·시각화·예측을 한 줄로 묶는 도구를 직접 만들었다.
+</p> <p>
+핵심 두 가지:
+</p> <ol> <li>기존 일 1회 수집(20시)으로는 <strong>시간대 패턴</strong>이 보이지 않는다 → 시간별 수집으로 전환.</li> <li>날씨와 헌혈량 사이의 <strong>상관관계</strong>는 혈액원 실무에서 체감하지만 정량 데이터가 없다 → 기상청 ASOS·중기예보 결합.</li> </ol> </section> <section class="section"> <h2>3. 시스템 설계</h2> <h3>3.1 데이터 파이프라인</h3> <figure class="figure"> <img src="/how-many-blood/assets/data-pipeline.svg" alt="데이터 파이프라인 — 소스 → 스크래퍼 → Firestore → ML → 시각화 5단계"> <figcaption>① 혈액정보 시스템 → ② Firebase Functions 스크래퍼 → ③ Firestore → ④ ML 학습 → ⑤ 시각화</figcaption> </figure> <h3>3.2 시간별 수집 스키마</h3> <p>기존 일 1회 → <strong>11시간 × 17개 시도</strong> 구조로 전환 (2025년 1월).</p> <pre class="code"><code>hourly_blood_records/&#123;date&#125;_&#123;hour&#125;  // 예: 2026-08-05_14
+&#123;
+  date: "2026-08-05",
+  hour: 14,                  // 10~20
+  regions: [
+    &#123; regionId, regionName, individual, group, total &#125;
+  ],
+  metadata, timestamp
+&#125;</code></pre> <p> <strong>20시 스냅샷 = 해당 일의 일일 총량.</strong> 별도 집계 없이 일별 통계를 낼 수 있어
+        v1의 <em>일별 문서 구조를 시간별 문서로 분리</em>하면서도 backward compatible하게 유지했다.
+</p> <h3>3.3 스크래퍼 · CORS · 스케줄</h3> <ul> <li>Cloud Scheduler → Firebase Functions (functions/scraper.ts) 매시간 10:00~20:00 KST</li> <li>CORS 프록시 + HTML/JS 파싱 → JSON 정규화</li> <li>5분 캐시로 과도한 호출 방지, 실패 시 exponential backoff 재시도</li> </ul> <h3>3.4 시각화 컴포넌트 — 신경 쓴 부분</h3> <p>
+단순 차트 라이브러리 호출이 아니라, <em>실무에서 패턴을 읽는 데 필요한 화면</em>을 직접 설계했다.
+        Recharts + Styled Components 기반, 각 차트는 18px 제목 / 12px 보조 설명 / hover 시 그림자 lift.
+</p> <ul> <li><strong>MainChart</strong> — 일별 추이 + 7일 이동평균 오버레이 (ComposedChart). 추세와 단일 일 변동을 한 화면에서 비교.</li> <li><strong>DayOfWeekChart / MonthlyAverageChart</strong> — 요일·월별 패턴. "금요일 단체 헌혈이 많은가, 1월 헌혈이 줄어드는가" 식의 운영 질문에 직접 응답.</li> <li><strong>HourlyAveragesChart</strong> — 11개 시간대 막대 그래프, 14시 피크가 시각적으로 즉시 읽힘.</li> <li><strong>WeekdayPatternHeatmap</strong> — 7요일 × 11시간 히트맵, 🔥 아이콘. 평일 오후 피크와 일요일 10시 일부 지점 미운영이 한눈에.</li> <li><strong>RegionalChart</strong> — 17개 시도 개인/단체 분리 막대, 지역별 운영 비중 비교.</li> <li><strong>MLForecastChart</strong> — ComposedChart + ReferenceLine, 오늘을 기준으로 좌측 실측 / 우측 예측·신뢰구간을 다른 색으로 분리 (500px).</li> <li><strong>InsightCard / WeatherImpactCard</strong> — positive/negative/neutral 색 구분, hover 시 2px lift. 추세·위험·날씨 영향 카드.</li> <li><strong>DataLimitationNotice</strong> — 데이터 한계 명시 배너. 14개월은 계절성 학습에 짧다는 점 등을 사용자에게 알린다.</li> </ul> <p>
+다크 모드 / 라이트 모드 모두 지원, 한국어·영어 i18n,
+        모바일(480px) ~ 태블릿 ~ 데스크탑 반응형. 모든 필터는 localStorage에 저장되어 새로고침해도 유지된다.
+</p> <h3>3.5 날씨 통합</h3> <ul> <li><strong>관측 데이터</strong>: 기상청 ASOS — 수원(119), 이천(203) 관측소. Firebase Functions로 매일 00:30 KST에 전날 데이터 수집.</li> <li><strong>예보 데이터</strong>: 중기예보(typ01/url/fct_medm_reg.php, D+3~10) + 동네예보 격자 기반(getVilageFcst, D+0~2). 2025년 1월 예보 구역 → 지점별로 마이그레이션해 관측·예측의 지역 일치성 개선.</li> <li><strong>Raw Data 보존</strong> — 점수화/정규화하지 않고 원본 수치 그대로 저장. 통계 분석 정밀도 우선.</li> </ul> <h3>3.6 ML 예측 모델 — 5가지 시각으로 보기</h3> <p> <strong>개인/단체 분리 모델 2개.</strong> 헌혈의 집(개인)과 헌혈 버스(단체)는 운영 패턴이 다르므로
+        (개인은 토요일도 운영 / 단체는 월~금 위주, 날씨 영향도 다름) 별도 학습한다. 같은 아키텍처를
+<em>수식 · 흐름도 · 기하 · 실제 코드 · 메트릭</em> 5가지 방식으로 풀어본다.
+</p> <h4>(a) 수식 — 변수별 단변량 OLS 후 합성</h4> <p>
+모델은 <em>다변량 선형회귀</em>이지만 한 번에 행렬식을 푸는 대신, 변수별로 1차 회귀를 돌려
+        기울기(β)만 뽑고, 요일은 평균 차이로 가중치를 만든다. 이렇게 한 이유:
+        데이터가 <strong>~58일</strong>로 적어 변수 간 상호작용 항을 안정적으로 추정하기 어렵기 때문이다.
+</p> <pre class="code"><code>  predicted = intercept
+            + β_temperature   · 기온           // (Tmin + Tmax) / 2
+            + β_precipitation · 강수량(mm)
+            + β_snowfall      · 적설(cm)
+            + dayOfWeek[dow]                  // 0=일 ... 6=토, 평균 차이값
+
+  intercept  = 전체 기간 평균 헌혈량
+  dayOfWeek[i] = (요일 i 평균) − intercept
+  β_x = (n·ΣXY − ΣX·ΣY) / (n·ΣX² − (ΣX)²)   // 단변량 OLS
+
+  predictedCount = round( max(0, predicted) )
+  confidence     = clamp(R², 0, 1)</code></pre> <h4>(b) 흐름도 — 주 1회 재학습 파이프라인</h4> <figure class="figure"> <img src="/how-many-blood/assets/training-flow.svg" alt="How Many Blood 학습 흐름 — 데이터 수집 → 피처 구성 → 변수별 OLS → 계수 합성 → 메트릭 → 예측"> <figcaption>predictionScheduler.ts (Cloud Scheduler) → predictionModel.ts → Firestore `predictionModels/&#123;id&#125;` 저장</figcaption> </figure> <h4>(c) 기하학적 의미 — 회귀 = 직선 맞추기</h4> <figure class="figure"> <img src="/how-many-blood/assets/ml-geometry.svg" alt="회귀 직선과 잔차의 기하학적 의미 — 데이터 점들에 최소제곱으로 직선 맞춤"> <figcaption>기온-헌혈량 산점도에 최소제곱으로 직선 ŷ = β₀ + β₁·T 를 맞춤. 잔차 e = y − ŷ 의 제곱합이 최소가 되도록 β가 결정된다.</figcaption> </figure> <h4>(d) 실제 코드 — 핵심 발췌</h4> <p><code>functions/src/predictionModel.ts</code> 의 단변량 OLS 구현. 외부 ML 라이브러리 없음.</p> <pre class="code"><code>function calculateLinearRegression(x: number[], y: number[]) &#123;
+  const n     = x.length
+  const sumX  = x.reduce((a, b) =&gt; a + b, 0)
+  const sumY  = y.reduce((a, b) =&gt; a + b, 0)
+  const sumXY = x.reduce((a, b, i) =&gt; a + b * y[i], 0)
+  const sumXX = x.reduce((a, b) =&gt; a + b * b, 0)
+
+  const slope     = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX)
+  const intercept = (sumY - slope * sumX) / n
+  return &#123; slope, intercept &#125;
+&#125;
+
+// 예측 적용
+function predictDonation(model, T, P, S, dow) &#123;
+  const &#123; coefficients &#125; = model
+  const predicted = coefficients.intercept
+    + coefficients.temperature    * T
+    + coefficients.precipitation  * P
+    + coefficients.snowfall       * S
+    + coefficients.dayOfWeek[dow]
+  return &#123;
+    predictedCount: Math.round(Math.max(0, predicted)),
+    confidence: Math.max(0, Math.min(1, model.metrics.r2Score)),
+  &#125;
+&#125;</code></pre> <p>
+변수마다 <code>calculateLinearRegression</code>을 호출해 β를 뽑고,
+<strong>요일 가중치는 "요일 평균 − 전체 평균"</strong>의 차이값으로 정의한다.
+        이렇게 하면 intercept가 자연스럽게 "전체 평균"이 되어 모델이 직관적으로 해석된다.
+</p> <h4>(e) 메트릭 — 모델을 어떻게 평가하는가</h4> <pre class="code"><code>R²   = 1 − Σ(yᵢ − ŷᵢ)² / Σ(yᵢ − ȳ)²     // 결정계수 — 1에 가까울수록 설명력 높음
+MAE  = Σ|yᵢ − ŷᵢ| / n                    // 평균 절대 오차
+RMSE = √(Σ(yᵢ − ŷᵢ)² / n)                // 큰 오차에 패널티를 더 주는 평균제곱근오차
+
+featureImportance[i] = |β_i| / Σ|β_j|     // 계수 절대값의 정규화 비율</code></pre> <ul> <li><strong>R² ≈ 0.72</strong> — 평일 14~16시 피크 패턴을 잘 잡지만, 이상 기후·특별 캠페인 등은 설명 못함.</li> <li><strong>MAE/RMSE</strong> — 같은 데이터를 in-sample로 평가하므로 <em>낙관적</em>이다. 시계열 교차검증은 후속.</li> <li><strong>featureImportance</strong> — 실무자(혈액원)가 "어떤 변수가 얼마나 영향을 주는가"를 즉시 이해할 수 있게 함.</li> </ul> <h4>왜 Ridge/GBT가 아닌가</h4> <p>
+14개월 데이터에서 <strong>Ridge 회귀</strong>는 정규화가 강해 패턴을 오히려 평탄화한다.
+<strong>GBT(XGBoost/LightGBM)</strong>는 학습 데이터 1,000건 이상에서 MAPE ~18% 수준으로
+        성능이 좋아지지만 (현재 ~58일치로는 과적합 위험), 데이터가 누적되면 동일 인터페이스(<code>coefficients + predict()</code>)
+        로 교체 가능하도록 설계했다.
+</p> </section> <section class="section"> <h2>4. 데이터 현황 및 한계</h2> <ul> <li><strong>보유 기간</strong>: 약 14개월 — 계절성 학습엔 짧다 (최소 3년 권장).</li> <li><strong>현재 R²</strong>: ~0.72 (학습 데이터 58일 기준). 평일 14~16시 피크는 안정적으로 포착.</li> <li><strong>한계</strong>: 결빙/폭우 등 이상 기후 케이스가 충분치 않음, 다른 혈액원 일반화는 추가 학습 필요.</li> </ul> <p class="callout"> <strong>참고.</strong> 혈액정보 시스템 측 API 구조 변경으로
+        현재는 실시간 데이터 수집이 중단된 상태다. 본 페이지는 <em>기능과 데이터 파이프라인 설계</em>를 기록한 것이며,
+        실제 운영 화면은 별도 목업/스크린샷으로 검증할 수 있다.
+</p> </section> <section class="section"> <h2>5. 레포지토리</h2> <div class="repo-grid"> <a class="repo-card" href="https://github.com/a7garden/how-many-blood" target="_blank" rel="noopener noreferrer"> <h4>how-many-blood <span class="badge">React · Firebase</span></h4> <p>프론트엔드(React 18 + TS + Vite + Recharts + Styled Components) + 백엔드(Firebase Functions + Firestore) + 스크래퍼 + ML 학습 파이프라인.</p> <code>a7garden/how-many-blood</code> </a> </div> </section> <section class="section"> <h2>6. 관련 문서</h2> <ul> <li><code>docs/PREDICTION_SYSTEM_PLAN.md</code> — 예측 시스템 구축 계획. 데이터 구조·스케줄·모델 설계 결정.</li> <li><code>docs/MID_TERM_FORECAST.md</code> — 기상청 중기예보 API 명세와 Firestore 스키마.</li> <li><code>docs/weather-forecast-migration.md</code> — 예보 구역 → 지점별 동네예보 마이그레이션 기록.</li> <li><code>docs/features/hourly-blood-collection-spec.md</code> — 시간별 수집 도입 사양 (v1 → v2).</li> <li><code>docs/architecture.md</code> — 프론트/백엔드/상태관리/스키마/배포 전략.</li> </ul> </section> </main> <footer class="site-footer"> <p>© 2026 a7garden · Portfolio</p> </footer>  </body></html>

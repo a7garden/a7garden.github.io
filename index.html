@@ -1,0 +1,14 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>a7garden</title><meta name="description" content="a7garden — personal space"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><!-- Fonts: SUIT + SUITE via jsDelivr (DESIGN.md §4.2) --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/variable/woff2/SUIT-Variable.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css"><!-- Prevent dark-mode flash: apply before paint --><script>
+      (function () {
+        const stored = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+        if (stored === "dark" || (!stored && prefersDark)) {
+          document.documentElement.classList.add("dark");
+        }
+        requestAnimationFrame(() =>
+          document.documentElement.classList.add("theme-ready"),
+        );
+      })();
+    </script><link rel="stylesheet" href="/_astro/BaseLayout.BT5TaGTC.css"></head><body><main class="flex min-h-screen flex-col items-center justify-center px-6"><!-- Identity --><header class="mb-16 text-center"><h1 class="text-5xl font-bold tracking-tight text-text sm:text-6xl" style="font-family: var(--font-display)">a7garden</h1><p class="mt-3 text-sm text-text-muted">personal space</p></header><!-- Route cards --><nav class="grid w-full max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3" aria-label="주요 페이지"><a href="/portfolio/" class="group rounded-lg border border-border p-8 transition-colors hover:border-border-strong hover:bg-surface-sunken"><h2 class="text-2xl font-semibold text-text" style="font-family: var(--font-display)">Portfolio</h2><p class="mt-2 text-sm text-text-muted">작업 기록</p></a><a href="/movies/" class="group rounded-lg border border-border p-8 transition-colors hover:border-border-strong hover:bg-surface-sunken"><h2 class="text-2xl font-semibold text-text" style="font-family: var(--font-display)">Movies</h2><p class="mt-2 text-sm text-text-muted">영화 기록</p></a><a href="/books/" class="group rounded-lg border border-border p-8 transition-colors hover:border-border-strong hover:bg-surface-sunken"><h2 class="text-2xl font-semibold text-text" style="font-family: var(--font-display)">Books</h2><p class="mt-2 text-sm text-text-muted">도서 기록</p></a></nav><!-- Theme toggle --><button id="theme-toggle" class="mt-16 text-xs text-text-muted transition-colors hover:text-text" aria-label="테마 전환">toggle theme</button></main></body></html><script type="module">document.getElementById(`theme-toggle`)?.addEventListener(`click`,()=>{let e=document.documentElement.classList.toggle(`dark`);localStorage.setItem(`theme`,e?`dark`:`light`)});</script>

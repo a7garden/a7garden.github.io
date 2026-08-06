@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 340" width="720" height="340" font-family="-apple-system, BlinkMacSystemFont, Pretendard, Inter, sans-serif">
+  <rect width="720" height="340" fill="#0b0d10"/>
+  <text x="20" y="28" fill="#e6e8eb" font-size="15" font-weight="600">예측식의 기하학적 의미 — 온도 vs 헌혈량</text>
+  <text x="20" y="48" fill="#a4adb8" font-size="11">β₁ = (n·Σxy − Σx·Σy) / (n·Σx² − (Σx)²) — 직선이 데이터에 최소제곱으로 맞춰지는 기울기</text>
+
+  <!-- coordinate plane -->
+  <g transform="translate(60, 80)">
+    <!-- axes -->
+    <line x1="0" y1="0" x2="0" y2="220" stroke="#a4adb8"/>
+    <line x1="0" y1="220" x2="600" y2="220" stroke="#a4adb8"/>
+
+    <!-- grid -->
+    <line x1="0" y1="55" x2="600" y2="55" stroke="#252c34" stroke-dasharray="2,3"/>
+    <line x1="0" y1="110" x2="600" y2="110" stroke="#252c34" stroke-dasharray="2,3"/>
+    <line x1="0" y1="165" x2="600" y2="165" stroke="#252c34" stroke-dasharray="2,3"/>
+    <line x1="150" y1="0" x2="150" y2="220" stroke="#252c34" stroke-dasharray="2,3"/>
+    <line x1="300" y1="0" x2="300" y2="220" stroke="#252c34" stroke-dasharray="2,3"/>
+    <line x1="450" y1="0" x2="450" y2="220" stroke="#252c34" stroke-dasharray="2,3"/>
+
+    <!-- data points (synthetic) -->
+    <g fill="#7c5cff" fill-opacity="0.7">
+      <circle cx="60" cy="180" r="4"/>
+      <circle cx="80" cy="170" r="4"/>
+      <circle cx="110" cy="160" r="4"/>
+      <circle cx="130" cy="155" r="4"/>
+      <circle cx="160" cy="140" r="4"/>
+      <circle cx="180" cy="145" r="4"/>
+      <circle cx="210" cy="130" r="4"/>
+      <circle cx="240" cy="125" r="4"/>
+      <circle cx="260" cy="110" r="4"/>
+      <circle cx="290" cy="115" r="4"/>
+      <circle cx="320" cy="95" r="4"/>
+      <circle cx="350" cy="100" r="4"/>
+      <circle cx="380" cy="80" r="4"/>
+      <circle cx="410" cy="75" r="4"/>
+      <circle cx="440" cy="60" r="4"/>
+      <circle cx="470" cy="65" r="4"/>
+      <circle cx="500" cy="50" r="4"/>
+      <circle cx="530" cy="45" r="4"/>
+      <circle cx="560" cy="35" r="4"/>
+    </g>
+
+    <!-- regression line -->
+    <line x1="40" y1="195" x2="580" y2="35" stroke="#d62828" stroke-width="2.5"/>
+    <text x="490" y="58" fill="#d62828" font-size="12" font-weight="600">ŷ = β₀ + β₁·T</text>
+
+    <!-- residual line for one point -->
+    <line x1="290" y1="115" x2="290" y2="92" stroke="#fcd34d" stroke-dasharray="2,2"/>
+    <text x="296" y="106" fill="#fcd34d" font-size="9">e (잔차)</text>
+
+    <!-- labels -->
+    <text x="0" y="236" fill="#a4adb8" font-size="10">−10°C</text>
+    <text x="295" y="236" fill="#a4adb8" font-size="10">15°C</text>
+    <text x="585" y="236" fill="#a4adb8" font-size="10">35°C</text>
+    <text x="-50" y="6" fill="#a4adb8" font-size="10">1,300</text>
+    <text x="-50" y="111" fill="#a4adb8" font-size="10">900</text>
+    <text x="-50" y="216" fill="#a4adb8" font-size="10">500</text>
+
+    <!-- axes titles -->
+    <text x="300" y="262" fill="#e6e8eb" font-size="11" text-anchor="middle">평균기온 (T)</text>
+    <text x="-44" y="110" fill="#e6e8eb" font-size="11" text-anchor="middle" transform="rotate(-90 -44 110)">헌혈량 (건)</text>
+  </g>
+
+  <!-- legend bottom -->
+  <g transform="translate(60, 320)" font-size="11">
+    <circle cx="6" cy="0" r="4" fill="#7c5cff" fill-opacity="0.7"/>
+    <text x="16" y="3" fill="#a4adb8">관측 (date, hour=20)</text>
+    <line x1="160" y1="0" x2="180" y2="0" stroke="#d62828" stroke-width="2.5"/>
+    <text x="186" y="3" fill="#a4adb8">회귀 직선 ŷ</text>
+    <line x1="276" y1="-4" x2="276" y2="4" stroke="#fcd34d" stroke-dasharray="2,2"/>
+    <text x="282" y="3" fill="#a4adb8">잔차 e = y − ŷ</text>
+    <text x="380" y="3" fill="#6c7682">SS_res = Σe² → R² = 1 − SS_res/SS_tot</text>
+  </g>
+</svg>

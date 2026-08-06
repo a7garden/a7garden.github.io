@@ -1,0 +1,59 @@
+<!DOCTYPE html><html lang="ko"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><title>Oxinot — 블록 기반 로컬 우선 마크다운 아웃라이너</title><meta name="description" content="Tauri 2 + React 19로 만든 로컬 우선 마크다운 아웃라이너. 폴더가 곧 사이드바, 블록이 곧 문장, .md 파일이 곧 진실."><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/variable/woff2/SUIT-Variable.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/geist-mono@5/index.css"><link rel="stylesheet" href="/portfolio/_astro/index.DP2KhXwN.css">
+<style>.oxinot-results[data-astro-cid-l3rz4ras]{grid-template-columns:repeat(3,1fr);margin:24px 0}.oxinot-results[data-astro-cid-l3rz4ras] .result-card[data-astro-cid-l3rz4ras]{padding:20px;text-align:center}.num[data-astro-cid-l3rz4ras]{color:var(--cat-oxi);font-family:var(--font-display);font-size:28px;font-weight:700;letter-spacing:-.02em}.label[data-astro-cid-l3rz4ras]{margin-top:4px;color:var(--color-text-muted);font-size:13px}.release-note[data-astro-cid-l3rz4ras]{margin-top:16px;color:var(--color-text-subtle);font-size:13px}.release-note[data-astro-cid-l3rz4ras] a[data-astro-cid-l3rz4ras]{color:var(--cat-oxi)}@media(max-width:720px){.oxinot-results[data-astro-cid-l3rz4ras]{grid-template-columns:1fr}}
+</style></head> <body>  <header class="site-header" data-astro-cid-l3rz4ras> <a class="back" href="/portfolio/" data-astro-cid-l3rz4ras>← Portfolio</a> </header> <main data-astro-cid-l3rz4ras> <section class="hero" data-astro-cid-l3rz4ras> <p class="eyebrow" data-astro-cid-l3rz4ras>Tauri 2 · React 19 · CodeMirror 6 · Rust</p> <h1 data-astro-cid-l3rz4ras>Oxinot</h1> <p class="lede" data-astro-cid-l3rz4ras> <strong data-astro-cid-l3rz4ras>로컬 우선</strong> 마크다운 아웃라이너. 폴더가 곧 사이드바,
+<strong data-astro-cid-l3rz4ras>블록이 곧 문장</strong>, <code data-astro-cid-l3rz4ras>.md</code> 파일이 곧 진실.
+        Tauri 2 셸 + React 19 + CodeMirror 6 + Rust 백엔드로 macOS·Windows·Linux 네이티브 앱.
+</p> <div class="meta" data-astro-cid-l3rz4ras> <dl data-astro-cid-l3rz4ras> <dt data-astro-cid-l3rz4ras>역할</dt><dd data-astro-cid-l3rz4ras>기획 · 설계 · 구현 전담 (단독)</dd> <dt data-astro-cid-l3rz4ras>환경</dt><dd data-astro-cid-l3rz4ras>React 19 · Mantine UI · CodeMirror 6 · D3 · Zustand</dd> <dt data-astro-cid-l3rz4ras>셸</dt><dd data-astro-cid-l3rz4ras>Tauri 2 (Rust) · SQLite 인덱싱 · 시스템 webview</dd> <dt data-astro-cid-l3rz4ras>저장</dt><dd data-astro-cid-l3rz4ras>사용자 폴더의 평문 .md 파일 (소스 오브 트루스)</dd> <dt data-astro-cid-l3rz4ras>버전</dt><dd data-astro-cid-l3rz4ras>v0.29.2 · GPLv3</dd> </dl> </div> <div class="hero-links" data-astro-cid-l3rz4ras> <a class="hero-link" href="https://github.com/a7garden/oxinot" target="_blank" rel="noopener noreferrer" data-astro-cid-l3rz4ras>GitHub <span class="arrow" data-astro-cid-l3rz4ras>↗</span></a> <a class="hero-link" href="https://github.com/a7garden/oxinot/releases" target="_blank" rel="noopener noreferrer" data-astro-cid-l3rz4ras>Releases <span class="arrow" data-astro-cid-l3rz4ras>↗</span></a> </div> </section> <section class="section" data-astro-cid-l3rz4ras> <h2 data-astro-cid-l3rz4ras>1. 파일 트리 — 폴더가 곧 사이드바</h2> <p data-astro-cid-l3rz4ras>
+별도 파일 탐색기 사이드바가 없다. <strong data-astro-cid-l3rz4ras>워크스페이스 폴더 자체가 아웃라인</strong>이고,
+        메인 뷰에서 바로 펼쳐 본다. 폴더는 자동으로 자기 이름의 <code data-astro-cid-l3rz4ras>.md</code> 파일을 가져
+        메타데이터를 적을 수 있다.
+</p> <figure class="figure" data-astro-cid-l3rz4ras> <img src="/portfolio/oxinot/assets/oxinot-01-index.png" alt="Oxinot 메인 화면 — Daily Notes / Knowledge / Projects / Research / Welcome가 펼쳐진 파일 트리" data-astro-cid-l3rz4ras> <figcaption data-astro-cid-l3rz4ras>워크스페이스 인덱스 · 4개 폴더 + 4개 일일 노트 + 11개 페이지</figcaption> </figure> <p data-astro-cid-l3rz4ras>
+왼쪽 사이드바 아이콘은 트리 / 검색 / 설정 / 그래프 뷰 / 일일 노트 등 핵심 진입점.
+        모든 컨트롤은 타이틀바 안에 통합되어 콘텐츠 공간을 최대한 확보한다.
+</p> </section> <section class="section" data-astro-cid-l3rz4ras> <h2 data-astro-cid-l3rz4ras>2. 블록 에디터 — Logseq 스타일 아웃라이너</h2> <p data-astro-cid-l3rz4ras>
+파일을 열면 <strong data-astro-cid-l3rz4ras>블록 단위</strong> 편집기로 들어간다. 모든 줄이 자체 ID를 가진
+        블록이고, <kbd data-astro-cid-l3rz4ras>Tab</kbd>/<kbd data-astro-cid-l3rz4ras>Shift+Tab</kbd>으로 무한 깊이로 들여쓴다.
+        입력하는 동시에 마크다운이 렌더링되고, <kbd data-astro-cid-l3rz4ras>Cmd/Ctrl + K</kbd>로 검색, <kbd data-astro-cid-l3rz4ras>Cmd/Ctrl + P</kbd>로 명령 팔레트를 연다.
+</p> <figure class="figure" data-astro-cid-l3rz4ras> <img src="/portfolio/oxinot/assets/oxinot-02-page.png" alt="Oxinot 프로젝트 페이지 — 헤더, 본문, 코드 블록, TODO 리스트를 가진 블록 에디터. 하단에는 Copilot 인라인 채팅." data-astro-cid-l3rz4ras> <figcaption data-astro-cid-l3rz4ras>블록 에디터 · 1초 디바운스 자동 저장 · 1.5초 후 폴더 단위 동기화</figcaption> </figure> <h3 data-astro-cid-l3rz4ras>2.1 핵심 인터랙션</h3> <ul data-astro-cid-l3rz4ras> <li data-astro-cid-l3rz4ras><strong data-astro-cid-l3rz4ras>Tab / Shift+Tab</strong> — 블록 들여쓰기 / 내어쓰기 (무한 깊이)</li> <li data-astro-cid-l3rz4ras><strong data-astro-cid-l3rz4ras>Enter</strong> — 같은 깊이의 새 블록</li> <li data-astro-cid-l3rz4ras><strong data-astro-cid-l3rz4ras>[[Page Name]]</strong> — 위키 링크, 그래프 뷰의 노드가 됨</li> <li data-astro-cid-l3rz4ras><strong data-astro-cid-l3rz4ras>드래그 앤 드롭</strong> — 블록 순서·깊이 자유롭게 재배열</li> <li data-astro-cid-l3rz4ras><strong data-astro-cid-l3rz4ras>1초 디바운스</strong> — 타이핑 멈추면 1초 뒤 자동 저장, 1.5초 뒤 폴더 동기화</li> </ul> <h3 data-astro-cid-l3rz4ras>2.2 라이브 마크다운 — 입력과 동시에 렌더링</h3> <p data-astro-cid-l3rz4ras>
+Lezer markdown 파서가 블록 콘텐츠를 파싱하고, CodeMirror 6 위에 즉시 그린다.
+        코드 펜스는 syntax highlight, 인용은 좌측 바, 리스트는 들여쓰기 깊이만큼
+        시각적으로 누적된다. 백엔드에는 <strong data-astro-cid-l3rz4ras>유효한 CommonMark</strong>로 직렬화되어 저장된다.
+</p> </section> <section class="section" data-astro-cid-l3rz4ras> <h2 data-astro-cid-l3rz4ras>3. 시스템 설계 — 프론트 / 백 / IPC</h2> <p data-astro-cid-l3rz4ras>
+핵심 설계 원칙은 <strong data-astro-cid-l3rz4ras>“검증은 경계에서”</strong>. 모든 mutation은
+<code data-astro-cid-l3rz4ras>src/tauri-api.ts</code>의 타입드 <code data-astro-cid-l3rz4ras>invoke</code> 래퍼를 거치고,
+        그 안에서 경로 traversal / 불법 문자 / URL 스킴을 차단한다. UI 어디에도
+        sanitize 코드가 흩어져 있지 않다.
+</p> <ul data-astro-cid-l3rz4ras> <li data-astro-cid-l3rz4ras><strong data-astro-cid-l3rz4ras>프론트</strong> — React 19 + Mantine UI + CodeMirror 6 + D3. Zustand + immer로 상태 관리.</li> <li data-astro-cid-l3rz4ras><strong data-astro-cid-l3rz4ras>백엔드</strong> — Tauri 2 (Rust). SQLite는 인덱싱·검색용 캐시, 진실은 평문 <code data-astro-cid-l3rz4ras>.md</code> 파일.</li> <li data-astro-cid-l3rz4ras><strong data-astro-cid-l3rz4ras>IPC</strong> — <code data-astro-cid-l3rz4ras>#[tauri::command]</code> 단위로 함수 노출, 권한은 <code data-astro-cid-l3rz4ras>capabilities/*.json</code>에 화이트리스트.</li> <li data-astro-cid-l3rz4ras><strong data-astro-cid-l3rz4ras>동기화</strong> — 파일시스템 watcher가 변경을 감지, SQLite 인덱스를 점진적 갱신. 충돌은 Rust 측에서 atomic.</li> <li data-astro-cid-l3rz4ras><strong data-astro-cid-l3rz4ras>자동 업데이트</strong> — <code data-astro-cid-l3rz4ras>tauri-plugin-updater</code>로 새 릴리스 알림, 백그라운드 체크.</li> </ul> <h3 data-astro-cid-l3rz4ras>3.1 한 번의 Tauri invoke 처리 흐름</h3> <pre class="code" data-astro-cid-l3rz4ras><code data-astro-cid-l3rz4ras>// 프론트 (React)
+const newBlock: BlockData = await invoke('create_block', &#123;
+  workspacePath,
+  request: &#123; pageId, parentId, content: '' &#125;,
+&#125;);
+
+// 백엔드 (Rust, tauri-api.ts → src-tauri/src/commands/block.rs)
+#[tauri::command]
+pub async fn create_block(
+  workspace_path: String,
+  request: CreateBlockRequest,
+) -&gt; Result&lt;BlockData, String&gt; &#123;
+  // 1) SQLite 트랜잭션 시작
+  // 2) 평문 .md 파일에 append
+  // 3) 인덱스 갱신
+  // 4) 새 BlockData 직렬화해 반환
+&#125;</code></pre> <p data-astro-cid-l3rz4ras>
+한 번의 호출이 <strong data-astro-cid-l3rz4ras>파일 + 인덱스를 atomic하게</strong> 갱신한다.
+        단일 호출 끝나면 UI도 즉시 새 상태로 re-render되고, 1초 뒤 디바운스
+        자동 저장이 같은 경로를 한 번 더 안전하게 덮어쓴다.
+</p> </section> <section class="section" data-astro-cid-l3rz4ras> <h2 data-astro-cid-l3rz4ras>4. 라이트 모드 + 명령 팔레트</h2> <p data-astro-cid-l3rz4ras>
+기본은 다크, 설정에서 라이트로 전환 가능 (시스템 설정 따르기 옵션도).
+        라이트 모드도 같은 디자인 토큰을 공유한다 — 보라색 액센트, Inter 본문 폰트,
+        동일한 들여쓰기 깊이 시각화.
+</p> <figure class="figure" data-astro-cid-l3rz4ras> <img src="/portfolio/oxinot/assets/oxinot-03-page-light.png" alt="라이트 모드 Oxinot — 흰 배경, 보라색 액센트, 동일한 블록 들여쓰기 시각화" data-astro-cid-l3rz4ras> <figcaption data-astro-cid-l3rz4ras>라이트 모드 · 같은 페이지가 색 테마만 전환</figcaption> </figure> <p data-astro-cid-l3rz4ras>
+명령 팔레트(<kbd data-astro-cid-l3rz4ras>Cmd/Ctrl + P</kbd>)는 모든 페이지·동작을 한 곳에 모은다.
+        아래는 “oxinot”으로 검색한 결과 — 위키 링크 복사, 페이지 이동, 블록 액션이 한 줄로 보인다.
+</p> <figure class="figure" data-astro-cid-l3rz4ras> <img src="/portfolio/oxinot/assets/oxinot-04-search.png" alt="Oxinot 명령 팔레트 — oxinot 검색 결과: Copy link to [[Oxinot]] 페이지 액션" data-astro-cid-l3rz4ras> <figcaption data-astro-cid-l3rz4ras>명령 팔레트 · fuzzy 검색으로 모든 페이지·동작 접근</figcaption> </figure> </section> <section class="section" data-astro-cid-l3rz4ras> <h2 data-astro-cid-l3rz4ras>5. 결과 — 데스크탑 노트 앱의 새로운 모양</h2> <div class="result-grid oxinot-results" data-astro-cid-l3rz4ras> <div class="result-card" data-astro-cid-l3rz4ras> <div class="num" data-astro-cid-l3rz4ras>~3MB</div> <div class="label" data-astro-cid-l3rz4ras>번들 크기 (Electron ~150MB 대비 ~1/50)</div> </div> <div class="result-card" data-astro-cid-l3rz4ras> <div class="num" data-astro-cid-l3rz4ras>v0.29.2</div> <div class="label" data-astro-cid-l3rz4ras>오픈소스 릴리스 (a7garden/oxinot)</div> </div> <div class="result-card" data-astro-cid-l3rz4ras> <div class="num" data-astro-cid-l3rz4ras>GPLv3</div> <div class="label" data-astro-cid-l3rz4ras>오픈소스 라이선스 · 소스 공개</div> </div> </div> <p class="callout" data-astro-cid-l3rz4ras> <strong data-astro-cid-l3rz4ras>왜 Oxinot을 만들었나.</strong> 기존 마크다운 에디터는 “파일 단위” 사고에 묶여 있다.
+        한 문장을 옮기려면 파일을 통째로 다시 써야 하고, 다른 페이지에서 참조하려면 노션·옵시디언 같은
+        클라우드 DB가 필요했다. Oxinot은 <em data-astro-cid-l3rz4ras>파일 + 블록 두 추상화</em>를 같이 다룬다 —
+<code data-astro-cid-l3rz4ras>.md</code>는 그대로, 단위 참조는 블록 단위로. 그리고 그게 어차피 사람이 생각하는 방식이다.
+</p> </section> <section class="section" data-astro-cid-l3rz4ras> <h2 data-astro-cid-l3rz4ras>6. 레포지토리</h2> <p data-astro-cid-l3rz4ras>단일 모노레포. 프론트(Vite + React) + 셸(Tauri 2 + Rust) + 자동 릴리스 파이프라인.</p> <div class="repo-grid" data-astro-cid-l3rz4ras> <a class="repo-card" href="https://github.com/a7garden/oxinot" target="_blank" rel="noopener noreferrer" data-astro-cid-l3rz4ras> <h4 data-astro-cid-l3rz4ras>oxinot <span class="badge" data-astro-cid-l3rz4ras>Tauri 2 · React 19 · Rust</span></h4> <p data-astro-cid-l3rz4ras>블록 기반 마크다운 아웃라이너. Logseq 스타일 무한 들여쓰기, Tauri 셸, SQLite 인덱싱, CodeMirror 6 에디터, D3 그래프 뷰, 명령 팔레트, 자동 업데이트, 한/영 i18n.</p> <code data-astro-cid-l3rz4ras>a7garden/oxinot</code> </a> </div> <p class="release-note" data-astro-cid-l3rz4ras>
+데스크탑 빌드는 <a href="https://github.com/a7garden/oxinot/releases" target="_blank" rel="noopener noreferrer" data-astro-cid-l3rz4ras>GitHub Releases</a>에서 macOS (.dmg) / Windows (MSIX) / Linux (AppImage) 로 받는다. 자동 체인지셋 + 릴리스 파이프라인이 커밋 메시지에서 버전을 추론해 PR을 올린다.
+</p> </section> </main> <footer class="site-footer" data-astro-cid-l3rz4ras> <p data-astro-cid-l3rz4ras>© 2026 a7garden · Portfolio</p> </footer>   </body></html>

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 220" role="img" aria-label="7가지 색 팔레트와 같은 색 3연속 매칭으로 몸통이 사라지는 BAEM 룰 다이어그램">
+  <style>
+    .bg { fill: #14181d; }
+    .label { font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Inter", sans-serif; font-size: 11px; fill: #a4adb8; }
+    .title { font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Inter", sans-serif; font-size: 13px; fill: #e6e8eb; font-weight: 600; }
+    .arrow { stroke: #a4adb8; stroke-width: 1.5; fill: none; }
+    .vanish { fill: #252c34; stroke: #6c7682; stroke-dasharray: 3 2; }
+    .vanish-x { stroke: #6c7682; stroke-width: 1.5; }
+  </style>
+
+  <rect class="bg" x="0" y="0" width="480" height="220" rx="8" />
+
+  <!-- Title -->
+  <text class="title" x="20" y="28">7색 팔레트</text>
+
+  <!-- 7 swatches with labels -->
+  <g transform="translate(20, 44)">
+    <rect x="0"   y="0" width="42" height="42" rx="6" fill="#1f2a36" />
+    <text class="label" x="21" y="62" text-anchor="middle">navy</text>
+
+    <rect x="60"  y="0" width="42" height="42" rx="6" fill="#3aa860" />
+    <text class="label" x="81" y="62" text-anchor="middle">green</text>
+
+    <rect x="120" y="0" width="42" height="42" rx="6" fill="#d8506c" />
+    <text class="label" x="141" y="62" text-anchor="middle">red</text>
+
+    <rect x="180" y="0" width="42" height="42" rx="6" fill="#f0c850" />
+    <text class="label" x="201" y="62" text-anchor="middle">yellow</text>
+
+    <rect x="240" y="0" width="42" height="42" rx="6" fill="#e88a3a" />
+    <text class="label" x="261" y="62" text-anchor="middle">orange</text>
+
+    <rect x="300" y="0" width="42" height="42" rx="6" fill="#2a8fd0" />
+    <text class="label" x="321" y="62" text-anchor="middle">blue</text>
+
+    <rect x="360" y="0" width="42" height="42" rx="6" fill="#6b46c1" />
+    <text class="label" x="381" y="62" text-anchor="middle">purple</text>
+  </g>
+
+  <!-- Match example -->
+  <text class="title" x="20" y="130">같은 색 3연속 → 소멸</text>
+
+  <!-- before: 3 same-color blocks -->
+  <g transform="translate(20, 144)">
+    <rect x="0"  y="0" width="36" height="36" rx="4" fill="#d8506c" />
+    <rect x="42" y="0" width="36" height="36" rx="4" fill="#d8506c" />
+    <rect x="84" y="0" width="36" height="36" rx="4" fill="#d8506c" />
+    <rect x="126" y="0" width="36" height="36" rx="4" fill="#3aa860" />
+  </g>
+
+  <!-- arrow -->
+  <g transform="translate(200, 162)">
+    <line class="arrow" x1="0" y1="0" x2="40" y2="0" />
+    <polyline class="arrow" points="34,-5 40,0 34,5" />
+  </g>
+
+  <!-- after: dashed empty -->
+  <g transform="translate(260, 144)">
+    <rect class="vanish" x="0"  y="0" width="36" height="36" rx="4" />
+    <rect class="vanish" x="42" y="0" width="36" height="36" rx="4" />
+    <rect class="vanish" x="84" y="0" width="36" height="36" rx="4" />
+    <rect x="126" y="0" width="36" height="36" rx="4" fill="#3aa860" />
+    <line class="vanish-x" x1="9"  y1="9"  x2="27" y2="27" />
+    <line class="vanish-x" x1="9"  y1="27" x2="27" y2="9" />
+    <line class="vanish-x" x1="51" y1="9"  x2="69" y2="27" />
+    <line class="vanish-x" x1="51" y1="27" x2="69" y2="9" />
+    <line class="vanish-x" x1="93" y1="9"  x2="111" y2="27" />
+    <line class="vanish-x" x1="93" y1="27" x2="111" y2="9" />
+  </g>
+
+  <text class="label" x="20" y="200">먹이 색 = 추가될 몸통 색. 3연속 매칭 시 그 3블록이 사라져 길이가 줄어든다.</text>
+</svg>

@@ -1,0 +1,33 @@
+<!DOCTYPE html><html lang="ko"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><title>oximemo — macOS 카드 기반 빠른 메모 앱</title><meta name="description" content="oximemo — Tauri 2 + Rust. macOS에서 ⌘⇧N(기본 안내) 또는 ⌥ 더블탭으로 떠오르는 카드 메모. plain .md가 진실의 원천, human/agent parity."><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/variable/woff2/SUIT-Variable.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/geist-mono@5/index.css"><link rel="stylesheet" href="/_astro/index.DB04cqhc.css"></head> <body>  <header class="site-header"> <a class="back" href="/oxi/">← oxi</a> </header> <main> <section class="hero"> <p class="eyebrow">oxi · macOS · Tauri 2 · Rust</p> <h1>oximemo</h1> <p class="lede"> <strong>생각이 사라지기 전에 잡아라.</strong> macOS에서 <kbd>⌘⇧N</kbd>(기본 안내 단축키) — 또는 <kbd>⌥</kbd> 더블탭(Accessibility 권한 필요) — 한 번이면 1프레임(≤16ms) 안에 떠오르는 카드 메모.
+        사람은 GUI로, AI 에이전트는 같은 CLI로 같은 vault를 다룬다.
+</p> <figure class="figure"> <img src="/oxi/oximemo/assets/oximemo-desktop.png" alt="oximemo 데스크탑 — 8개 메모가 populated된 상태. 좌측에 '모든 메모 8 / 즐겨찾기 3' 카운트와 'All inbox todo idea bookmark snippet' 카테고리 필터, 상단에 태그 #agent #oxi #rust #portfolio 등, 메인에 oxi 생태계 메모 카드 8장"> <figcaption>oximemo 데스크탑 — 카드 그리드. 카테고리·태그·즐겨찾기로 즉시 필터링.</figcaption> </figure> <div class="meta"> <dl> <dt>역할</dt><dd>설계·구현·공개 (4개 workspace 멤버)</dd> <dt>언어</dt><dd>Rust 2024 (rust 1.89+)</dd> <dt>스택</dt><dd>Tauri 2 · redb · tantivy · blake3 · notify · React (GUI)</dd> <dt>버전</dt><dd>v0.7.0 · MIT · macOS 14+ Apple Silicon</dd> </dl> </div> </section> <section class="section"> <h2>1. 핵심 약속</h2> <p> <em>"생각을 잡는 속도"</em>가 이 프로젝트가 보호하는 유일한 가치다. AI 요약·자동 태깅·챗봇은 그 속도와 신뢰성을
+        끌어내리므로 일부러 두지 않는다.
+</p> <div class="result-grid"> <div class="result-card"> <h4>인간 시나리오</h4> <p>macOS 어디서든 <kbd>⌘⇧N</kbd> → 한 줄 입력 → <code>Esc</code>로 dismiss → 작업으로 복귀. (보조: <kbd>⌥</kbd> 더블탭 — press+release 1쌍을 threshold 350ms 이내로 2회)</p> </div> <div class="result-card"> <h4>에이전트 시나리오</h4> <p>코딩 에이전트/로컬 스크립트가 같은 vault를 CLI로 안전하게 읽고 쓴다 (중복 방지).</p> </div> </div> </section> <section class="section"> <h2>2. 아키텍처: 3계층 스토리지</h2> <figure class="figure figure-graph"> <img src="/oxi/oximemo/assets/oximemo-storage.svg" alt="oximemo 3-tier storage: plain .md files → redb metadata index → tantivy BM25 full-text index"> <figcaption> <strong>파일이 진실의 원천</strong>. 인덱스는 캐시일 뿐 — <code>oximemo reindex</code>로 언제든 재구축.
+          인덱스 레이어에 SQLite/C 의존성 없음.
+</figcaption> </figure> <div class="repo-grid"> <div class="repo-card"> <h4>oximemo-core</h4> <p>도메인 로직 · plain .md I/O · redb 인덱스 · tantivy BM25 · TOML frontmatter</p> </div> <div class="repo-card"> <h4>oximemo-cli</h4> <p>CLI — human은 table, agent는 JSON/NDJSON</p> </div> <div class="repo-card"> <h4>oximemo-capture</h4> <p>오버레이 캡처 윈도우 — off-screen warm-up으로 1프레임 표시. <kbd>⌥</kbd> 더블탭 트리거 (Accessibility 권한 필요)</p> </div> <div class="repo-card"> <h4>apps/desktop (Tauri 2)</h4> <p>macOS 네이티브 데스크탑 셸 — core 위의 얇은 표현 계층. <kbd>⌘⇧N</kbd> 전역 단축키를 <code>tauri-plugin-global-shortcut</code>으로 항상 등록 (권한 불필요 — 기본 안내 단축키)</p> </div> </div> </section> <section class="section"> <h2>3. CLI 우선</h2> <p>CLI는 권위 있는 인터페이스다 — 데스크탑 앱과 동일한 <code>oximemo-core</code>를 사용한다.</p> <pre class="code"><code># 한 줄 메모
+oximemo new "Ship the redb bump before the freeze" --tag backlog --category todo
+
+# 최근 메모 (table for humans, ndjson for agents)
+oximemo list --limit 10
+oximemo list --favorites --format ndjson
+
+# 한 개 읽기 (JSON 기본, --md로 raw 파일)
+oximemo get 019fa927-a897-7e12-9102-8a8c7ebbb594 --md
+
+# BM25 전문 검색
+oximemo search "redb upgrade" --limit 5 --format ndjson
+
+# 동기화 (에이전트용 — body-less manifest)
+oximemo export --since &lt;cursor&gt;
+# → &#123; id, hash, updated_at, deleted &#125;[]</code></pre> </section> <section class="section"> <h2>4. Hash-based 동기화</h2> <p> <code>oximemo export</code>는 본문 없는 매니페스트(&#123;id, hash, updated_at, deleted&#125;)를 출력한다.
+        에이전트가 해시를 비교해 변경된 것만 가져오고 cursor를 전진시킨다. <code>ARG_MAX</code>(대용량 ID 리스트 한계)는
+<code>--ids-file</code>/<code>--ids-stdin</code>으로 우회.
+</p> </section> <section class="section"> <h2>5. 캡처 속도 최적화</h2> <p> <em>"트리거에서 1프레임"</em>을 만들기 위해 캡처 윈도우는 <strong>항상 떠 있되 화면 밖</strong>에 parked 상태로 유지된다.
+        cold-start 비용 없이 warm한 윈도우가 즉시 보인다. 두 트리거(<kbd>⌘⇧N</kbd> 단축키 / <kbd>⌥</kbd> 더블탭) 어느 쪽이든 같은 <code>capture:show</code> 이벤트를 emit한다. 다음은 트리거 → dismiss까지의 4단계:
+</p> <figure class="figure"> <img src="/oxi/oximemo/assets/oximemo-capture-flow.svg" alt="oximemo 빠른 캡처 4단계: 1) idle 상태에서 capture 윈도우는 off-screen에 parked, 2) 사용자가 ⌘⇧N 또는 ⌥ 더블탭으로 트리거 → capture:show 이벤트 emit, 3) Tauri 이벤트 핸들러가 capture 윈도우를 16ms 안에 show, 4) 한 줄 입력 후 Esc → 윈도우는 hidden으로 복귀 (destroy 안 됨)"> <figcaption> <strong>Step 1</strong> idle — capture NSWindow는 화면 밖 parked 상태로 떠 있음 (warm).
+<strong>Step 2</strong> 사용자가 <kbd>⌘⇧N</kbd> (또는 <kbd>⌥</kbd> 더블탭) → <code>capture:show</code> 이벤트 emit.
+<strong>Step 3</strong> Tauri 메인 스레드 핸들러가 capture 윈도우를 1프레임(≤16ms) 안에 <code>show()</code>.
+<strong>Step 4</strong> 한 줄 입력 → <code>Esc</code>로 dismiss. 윈도우는 다시 hidden으로 parked (destroy 아님).
+</figcaption> </figure> <ul> <li>오버레이 윈도우를 off-screen에 미리 띄워 warm-up — 트리거 시 1프레임(≤16ms) 표시</li> <li>fs watcher가 외부 쓰기(에디터, iCloud)를 감지 → 부분 쓰기에 재시도</li> <li>인덱서 크래시 없음 — notify + debounce + retry</li> <li>OKLCH 색상 라벨 — 인지적으로 균일, 라이트/다크 모두 자연스러움</li> </ul> </section> <section class="section"> <h2>6. 시스템 요구사항 & 비범위</h2> <ul> <li><strong>지원</strong>: macOS 14+ on Apple Silicon (<code>aarch64-apple-darwin</code>)</li> <li><strong>v1 범위 밖</strong>: Windows · Linux · 모바일 (의도적)</li> <li><strong>v1 범위 밖</strong>: AI 요약 · 자동 태깅 · 챗봇 (속도와 신뢰성을 깎는다고 판단)</li> </ul> </section> <section class="section"> <h2>7. 레포지토리</h2> <a class="paper-link" href="https://github.com/project-oxi/oximemo" target="_blank" rel="noopener noreferrer">
+⬡ github.com/project-oxi/oximemo
+</a> </section> </main> <footer class="site-footer"> <p>© 2026 a7garden · oxi brand</p> </footer>  </body></html>

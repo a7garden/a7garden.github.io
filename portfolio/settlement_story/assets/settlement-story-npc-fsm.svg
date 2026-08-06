@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" font-family='-apple-system,BlinkMacSystemFont,"Pretendard","Inter",sans-serif' role="img" aria-label="시민 NPC 유한 상태 기계 전이 다이어그램">
+<title>Citizen NPC 유한 상태 기계 (5상태 전이 그래프)</title>
+<desc>SLEEP, WORK, FREE, NONE, MOVE 다섯 상태 간 전이 조건을 노드-엣지 그래프로 표현. MOVE는 A* 경로 추적 허브.</desc>
+<rect x="0" y="0" width="1000" height="600" fill="#0b0d10"/>
+<defs>
+<marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5a6679"/></marker>
+<marker id="arrA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7c5cff"/></marker>
+</defs>
+<g opacity="0.5">
+<line x1="40" y1="0" x2="40" y2="600" stroke="#11151b" stroke-width="1"/>
+<line x1="80" y1="0" x2="80" y2="600" stroke="#11151b" stroke-width="1"/>
+<line x1="120" y1="0" x2="120" y2="600" stroke="#11151b" stroke-width="1"/>
+<line x1="160" y1="0" x2="160" y2="600" stroke="#11151b" stroke-width="1"/>
+<line x1="200" y1="0" x2="200" y2="600" stroke="#11151b" stroke-width="1"/>
+<line x1="240" y1="0" x2="240" y2="600" stroke="#11151b" stroke-width="1"/>
+<line x1="280" y1="0" x2="280" y2="600" stroke="#11151b" stroke-width="1"/>
+<line x1="320" y1="0" x2="320" y2="600" stroke="#11151b" stroke-width="1"/>
+<line x1="360" y1="0" x2="360" y2="600" stroke="#11151b" stroke-width="1"/>
+<line x1="400" y1="0" x2="400" y2="600" stroke="#11151b" stroke-width="1"/>
+<line x1="440" y1="0" x2="440" y2="600" stroke="#11151b" stroke-width="1"/>
+<line x1="480" y1="0" x2="480" y2="600" stroke="#11151b" stroke-width="1"/>
+<line x1="520" y1="0" x2="520" y2="600" stroke="#11151b" stroke-width="1"/>
+<line x1="560" y1="0" x2="560" y2="600" stroke="#11151b" stroke-width="1"/>
+<line x1="600" y1="0" x2="600" y2="600" stroke="#11151b" stroke-width="1"/>
+<line x1="640" y1="0" x2="640" y2="600" stroke="#11151b" stroke-width="1"/>
+<line x1="680" y1="0" x2="680" y2="600" stroke="#11151b" stroke-width="1"/>
+<line x1="720" y1="0" x2="720" y2="600" stroke="#11151b" stroke-width="1"/>
+<line x1="760" y1="0" x2="760" y2="600" stroke="#11151b" stroke-width="1"/>
+<line x1="800" y1="0" x2="800" y2="600" stroke="#11151b" stroke-width="1"/>
+<line x1="840" y1="0" x2="840" y2="600" stroke="#11151b" stroke-width="1"/>
+<line x1="880" y1="0" x2="880" y2="600" stroke="#11151b" stroke-width="1"/>
+<line x1="920" y1="0" x2="920" y2="600" stroke="#11151b" stroke-width="1"/>
+<line x1="960" y1="0" x2="960" y2="600" stroke="#11151b" stroke-width="1"/>
+<line x1="0" y1="40" x2="1000" y2="40" stroke="#11151b" stroke-width="1"/>
+<line x1="0" y1="80" x2="1000" y2="80" stroke="#11151b" stroke-width="1"/>
+<line x1="0" y1="120" x2="1000" y2="120" stroke="#11151b" stroke-width="1"/>
+<line x1="0" y1="160" x2="1000" y2="160" stroke="#11151b" stroke-width="1"/>
+<line x1="0" y1="200" x2="1000" y2="200" stroke="#11151b" stroke-width="1"/>
+<line x1="0" y1="240" x2="1000" y2="240" stroke="#11151b" stroke-width="1"/>
+<line x1="0" y1="280" x2="1000" y2="280" stroke="#11151b" stroke-width="1"/>
+<line x1="0" y1="320" x2="1000" y2="320" stroke="#11151b" stroke-width="1"/>
+<line x1="0" y1="360" x2="1000" y2="360" stroke="#11151b" stroke-width="1"/>
+<line x1="0" y1="400" x2="1000" y2="400" stroke="#11151b" stroke-width="1"/>
+<line x1="0" y1="440" x2="1000" y2="440" stroke="#11151b" stroke-width="1"/>
+<line x1="0" y1="480" x2="1000" y2="480" stroke="#11151b" stroke-width="1"/>
+<line x1="0" y1="520" x2="1000" y2="520" stroke="#11151b" stroke-width="1"/>
+<line x1="0" y1="560" x2="1000" y2="560" stroke="#11151b" stroke-width="1"/>
+</g>
+<path d="M 76.0 300.0 Q 110.0 300.0 107.0 300.0" fill="none" stroke="#5a6679" stroke-width="1.8" stroke-opacity="0.78" marker-end="url(#arr)"/>
+<path d="M 209.4 280.7 Q 489.8 171.3 787.6 127.7" fill="none" stroke="#5a6679" stroke-width="1.8" stroke-opacity="0.78" marker-end="url(#arr)"/>
+<path d="M 210.0 282.4 Q 500.0 180.0 790.0 282.4" fill="none" stroke="#5a6679" stroke-width="1.8" stroke-opacity="0.78" marker-end="url(#arr)"/>
+<path d="M 209.4 319.3 Q 489.8 428.7 787.6 472.3" fill="none" stroke="#5a6679" stroke-width="1.8" stroke-opacity="0.78" marker-end="url(#arr)"/>
+<path d="M 871.0 163.0 Q 970.0 300.0 871.0 437.0" fill="none" stroke="#5a6679" stroke-width="1.8" stroke-opacity="0.78" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<path d="M 840.0 353.0 Q 840.0 390.0 840.0 427.0" fill="none" stroke="#5a6679" stroke-width="1.8" stroke-opacity="0.78" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<path d="M 792.1 142.7 Q 650.0 210.0 509.7 276.5" fill="none" stroke="#7c5cff" stroke-width="2.2" stroke-opacity="0.92" marker-start="url(#arrA)" marker-end="url(#arrA)"/>
+<path d="M 787.0 300.0 Q 650.0 300.0 515.0 300.0" fill="none" stroke="#7c5cff" stroke-width="2.2" stroke-opacity="0.92" marker-start="url(#arrA)" marker-end="url(#arrA)"/>
+<path d="M 792.1 457.3 Q 650.0 390.0 509.7 323.5" fill="none" stroke="#7c5cff" stroke-width="2.2" stroke-opacity="0.92" marker-start="url(#arrA)" marker-end="url(#arrA)"/>
+<rect x="298.7" y="214.0" width="102.6" height="22" rx="11" fill="#0b0d10" stroke="#252c34" stroke-width="1"/>
+<text x="350" y="229.0" text-anchor="middle" font-size="12" fill="#a4adb8">낮 + 일터 배정</text>
+<rect x="518.1" y="209.0" width="83.8" height="22" rx="11" fill="#0b0d10" stroke="#252c34" stroke-width="1"/>
+<text x="560" y="224.0" text-anchor="middle" font-size="12" fill="#a4adb8">밤 + 거주지</text>
+<rect x="386.6" y="391.0" width="130.8" height="22" rx="11" fill="#0b0d10" stroke="#252c34" stroke-width="1"/>
+<text x="452" y="406.0" text-anchor="middle" font-size="12" fill="#a4adb8">일터 없음 / 체력 ↓</text>
+<rect x="912.5" y="289.0" width="65.0" height="22" rx="11" fill="#0b0d10" stroke="#252c34" stroke-width="1"/>
+<text x="945" y="304.0" text-anchor="middle" font-size="12" fill="#a4adb8">일터 변화</text>
+<rect x="838.8" y="381.0" width="74.4" height="22" rx="11" fill="#0b0d10" stroke="#252c34" stroke-width="1"/>
+<text x="876" y="396.0" text-anchor="middle" font-size="12" fill="#a4adb8">아침 ⇄ 밤</text>
+<rect x="617.5" y="207.0" width="65.0" height="22" rx="11" fill="#0b0d10" stroke="#2a2347" stroke-width="1"/>
+<text x="650" y="222.0" text-anchor="middle" font-size="12" fill="#e6e8eb">A* 경로</text>
+<rect x="631.6" y="275.0" width="36.8" height="22" rx="11" fill="#0b0d10" stroke="#2a2347" stroke-width="1"/>
+<text x="650" y="290.0" text-anchor="middle" font-size="12" fill="#e6e8eb">복귀</text>
+<rect x="631.6" y="371.0" width="36.8" height="22" rx="11" fill="#0b0d10" stroke="#2a2347" stroke-width="1"/>
+<text x="650" y="386.0" text-anchor="middle" font-size="12" fill="#e6e8eb">배회</text>
+<circle cx="60" cy="300" r="11" fill="#7c5cff"/>
+<text x="60" y="333" text-anchor="middle" font-size="11" fill="#6c7682">스폰</text>
+<circle cx="160" cy="300" r="48" fill="#10151b" stroke="#3a4350" stroke-width="2"/>
+<text x="160" y="305.0" text-anchor="middle" font-size="16" font-weight="600" fill="#a4adb8">NONE</text>
+<circle cx="460" cy="300" r="50" fill="#1b1730" stroke="#7c5cff" stroke-width="2.4"/>
+<text x="460" y="305.0" text-anchor="middle" font-size="17" font-weight="700" fill="#7c5cff">MOVE</text>
+<circle cx="840" cy="120" r="48" fill="#14181d" stroke="#252c34" stroke-width="2"/>
+<text x="840" y="125.0" text-anchor="middle" font-size="16" font-weight="600" fill="#e6e8eb">WORK</text>
+<circle cx="840" cy="300" r="48" fill="#14181d" stroke="#252c34" stroke-width="2"/>
+<text x="840" y="305.0" text-anchor="middle" font-size="16" font-weight="600" fill="#e6e8eb">SLEEP</text>
+<circle cx="840" cy="480" r="48" fill="#14181d" stroke="#252c34" stroke-width="2"/>
+<text x="840" y="485.0" text-anchor="middle" font-size="16" font-weight="600" fill="#e6e8eb">FREE</text>
+<g transform="translate(48, 568)" font-size="11.5" fill="#6c7682">
+<circle cx="8" cy="0" r="5" fill="#7c5cff"/><text x="20" y="4">MOVE = 이동 허브 (A* 경로 추적)</text>
+<g transform="translate(360,0)"><line x1="0" y1="0" x2="32" y2="0" stroke="#5a6679" stroke-width="1.8" marker-end="url(#arr)"/><text x="42" y="4">단방향 (스폰 → 상태)</text></g>
+<g transform="translate(600,0)"><line x1="0" y1="0" x2="32" y2="0" stroke="#7c5cff" stroke-width="2.2" marker-start="url(#arrA)" marker-end="url(#arrA)"/><text x="42" y="4">양방향 (상태 ⇄ 이동)</text></g>
+</g>
+</svg>

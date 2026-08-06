@@ -1,0 +1,83 @@
+<!DOCTYPE html><html lang="ko"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><title>RED Toolkit — 헌혈 운영 도구 모음 (8주 계산 · 시간표 · 단체 예측)</title><meta name="description" content="대한적십자사 경기혈액원 단체 헌혈 운영을 위해 만든 도구 모음. 8주 계산기, 학교 시간표, 단체 분석·예측."><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/variable/woff2/SUIT-Variable.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/geist-mono@5/index.css"><link rel="stylesheet" href="/_astro/index.DB04cqhc.css"></head> <body>  <header class="site-header"> <a class="back" href="/red-cross-works/">← Red Cross Works</a> </header> <main> <section class="hero"> <p class="eyebrow">Internal Tools · React 18 · Mantine UI · Firebase</p> <h1>RED Toolkit</h1> <p class="lede">
+경기혈액원 단체 헌혈 운영에서 실제로 쓰던 <strong>데스크탑 도구 3종 묶음</strong>.
+        헌혈 주기 계산, 학교 시간표 조회, 단체별 헌혈 인원 예측까지 — 모두
+<em>업무 흐름에서 반복적으로 필요한 작업</em>을 빠르게 처리하기 위해 설계했다.
+</p> <div class="meta"> <dl> <dt>용도</dt><dd>대한적십자사 경기혈액원 단체 헌혈 실무 (내부 사용)</dd> <dt>프론트</dt><dd>React 18 · Vite 7 · Mantine UI v8 · lucide-react · dayjs</dd> <dt>백엔드</dt><dd>Firebase Cloud Functions · Firestore · IndexedDB (로컬 캐시)</dd> <dt>예측 엔진</dt><dd>순수 JS — 외부 ML 라이브러리 없음. Heuristic → Ridge 회귀 자동 전환</dd> <dt>외부 연동</dt><dd>comcigan-parser (학교 시간표)</dd> </dl> </div> </section> <section class="section"> <h2>1. 화면</h2> <p>3개 도구를 사이드바 토글로 전환한다. 활성 도구는 localStorage에 저장되어 새로고침해도 유지.</p> <figure class="figure"> <img src="/red-toolkit/assets/toolkit.png" alt="RED Toolkit 8주 계산기 — 캘린더에 다음 헌혈 가능일 표시"> <figcaption>8주 계산기 — 마지막 헌혈일 + 56일 후 다음 헌혈 가능일을 캘린더에 표시. mock Cloud Functions</figcaption> </figure> <figure class="figure"> <img src="/red-toolkit/assets/timetable.png" alt="RED Toolkit 시간표 조회 — 학교 목록에서 학교 선택 → 학년/반/요일/교시 시간표"> <figcaption>시간표 조회 — 경기도 고등학교 목록(mock)에서 학교 선택 시 학년/반/요일/교시별 시간표 표시. Cloud Functions <code>getSchools</code> + <code>getTimetable</code> 응답 mock</figcaption> </figure> <figure class="figure"> <img src="/red-toolkit/assets/analysis.png" alt="RED Toolkit 단체 분석·예측 — 7개 단체 카드, 차트, Ridge 회귀 예측"> <figcaption>단체 분석·예측 — 등록 단체 7개(일반단체/공공기관/대학교/고등학교/군부대) 분포, 회당 평균 차트, Ridge 회귀 기반 다음 행사 헌혈 인원 예측</figcaption> </figure> </section> <section class="section"> <h2>2. 세 가지 도구</h2> <h3>2.1 8주 계산기 (EightWeekCalculator)</h3> <p>
+전혈 400mL 헌혈의 법적 최소 재헌혈 간격은 56일(8주)이다.
+        기존에는 직원들이 손으로 세 날짜를 세야 했다 — 단체 행사의 경우 단체별·차수별로
+        또 다시 계산해야 해서 빈번한 실수가 발생했다.
+<em>헌혈일 + 주기 → 다음 헌혈 가능일</em>을 즉시 보여주는 캘린더 UI.
+        혈장·혈소판 성분헌혈의 별도 주기도 적용.
+</p> <h3>2.2 학교 시간표 (SchoolTimetable)</h3> <p>
+학교 단체 헌혈은 <strong>학년/반별 수업 시간</strong>을 알아야 배차 스케줄을 짤 수 있다.
+        컴시간 파서(comcigan-parser)로 학교 코드를 입력하면 학년·반·요일·교시별 수업 시간을 조회.
+<em>"5학년 2반이 수요일 6교시에 비는가?"</em> 같은 질문에 즉시 답한다.
+        학교 시간표 캐싱은 IndexedDB에 저장해 오프라인에서도 조회 가능.
+</p> <h3>2.3 단체 분석·예측 (OrganizationAnalysisTool)</h3> <p>
+핵심 도구. 등록된 단체의 헌혈 이력을 시각화하고 다음 행사 헌혈 인원을 예측한다.
+        CSV 업로드 / 수동 입력 두 경로로 기록을 추가할 수 있고,
+        17개 시도 지역·단체 구분(직장/학교/군부대/지역사회)별로 점수화.
+</p> </section> <section class="section"> <h2>3. 예측 시스템 — Ridge 회귀 (Phase 2)</h2> <h3>3.1 곱셈식 예측 공식</h3> <figure class="figure"> <img src="/red-toolkit/assets/prediction-formula.svg" alt="RED Toolkit 예측 공식 — Base × S_seasonal × S_dow × S_cycle × S_global × S_local"> <figcaption>Heuristic 모드: 6개 팩터의 곱으로 예측</figcaption> </figure> <ul> <li><strong>Base</strong> — 단체의 회당 평균 헌혈 인원</li> <li><strong>S_seasonal</strong> — 월별 계절성 (해당 월 평균 / 전체 평균)</li> <li><strong>S_dow</strong> — 요일별 보정 (월~일)</li> <li><strong>S_cycle</strong> — 마지막 헌혈 이후 경과 효과를 <em>시그모이드</em>로 계산. 단체마다 다른 평균 주기를 기준으로 함.</li> <li><strong>S_global</strong> — 최근 3개월 전국 추세</li> <li><strong>S_local</strong> — 단체 자체의 최근 추세</li> </ul> <h3>3.2 CycleFactor — 단순 경과일 비교가 아닌 시그모이드</h3> <p>
+8주가 지났는지로 자르면 12주 주기 단체는 8주 시점에 인위적으로 잘라낸다.
+        RED Toolkit은 단체의 <em>실제 평균 주기 T_cycle</em> 대비 경과일로 시그모이드를 계산한다.
+</p> <pre class="code"><code>S_cycle = 1 / (1 + e^(-k × (d / T_cycle - 1)))
+  k = 5 (감도 파라미터)
+  d / T_cycle = 1 일 때 S_cycle = 0.5
+  d가 커질수록 1에 수렴 (떨어지지는 않음)</code></pre> <h3>3.3 Ridge 회귀 — 5가지 시각으로 보기</h3> <p>
+데이터가 <strong>300건 미만</strong>이면 위 곱셈식(<code>modelType: 'heuristic'</code>)을 그대로 쓰고,
+<strong>300건 이상</strong>이면 closed-form Ridge 회귀로 팩터 가중치를 자동 튜닝한다.
+        같은 아키텍처를 <em>수식 · 흐름도 · 행렬 기하 · 실제 코드 · 한계</em> 5가지 방식으로 풀어본다.
+</p> <h4>(a) 수식 — log-선형 Ridge</h4> <p> <code>Base</code>만 로그 변환해 곱셈 관계를 가산 관계로 바꾸고, 나머지 팩터는 선형 결합.
+        정규화 항 αI로 과적합을 제어한다. α=0.1은 기본값 — 데이터 1,000건 단위에서 안정적.
+</p> <pre class="code"><code>ln(ŷ) = w₀ + w₁·ln(Base)
+            + w₂·S_seasonal + w₃·S_dow
+            + w₄·S_cycle    + w₅·S_global
+            + w₆·S_local
+
+  w* = (XᵀX + αI)⁻¹ Xᵀy,    α = 0.1
+  ŷ  = exp( ... )</code></pre> <h4>(b) 흐름도 — 학습/예측 한 사이클</h4> <figure class="figure"> <img src="/red-toolkit/assets/ridge-flow.svg" alt="RED Toolkit Ridge 회귀 학습 흐름 — 학습 데이터 구성 → 설계 행렬 X → Ridge 가중치 → 모델 결과 → 예측 적용"> <figcaption>trainRidgeModel() (300건 이상) → Ridge closed-form → predictDonors()에서 ŷ 산출</figcaption> </figure> <h4>(c) 행렬 기하 — Ridge는 정규화된 최소제곱</h4> <p>
+표준 OLS는 <em>Xw ≈ y</em> 를 풀지만, 변수 간 다중공선성이 있으면 XᵀX 가 특이행렬에 가까워져
+        해가 불안정해진다. Ridge는 <strong>XᵀX + αI</strong> 로 대각선을 부풀려 <em>안정적인 역행렬</em>을 보장한다.
+</p> <pre class="code"><code>  XᵀX           = Σᵢ xᵢ · xᵢᵀ    (p×p 공분산 행렬)
+  Xᵀy           = Σᵢ xᵢ · yᵢ    (p×1)
+  (XᵀX + αI)⁻¹                  (정규화 후 역행렬, 항상 존재)
+
+  순수 JS 구현: invertMatrix() 가우스-소거법으로 직접 계산
+                → npm 의존성 없음</code></pre> <h4>(d) 실제 코드 — Ridge 핵심 (utils/donationPrediction.js)</h4> <pre class="code"><code>// Ridge closed-form
+const ridgeRegression = (X, y, alpha = 0.1) => &#123;
+  const Xt  = transpose(X)
+  const XtX = matMul(Xt, X)              // p×p
+  for (let i = 0; i &lt; XtX.length; i++)   // 대각선에 α 더하기
+    XtX[i][i] += alpha
+
+  const inv = invertMatrix(XtX)          // Gauss-Jordan 소거 (외부 lib 없음)
+  if (!inv) return null
+
+  const Xty = Xt.map(row => row.reduce((s, v, i) => s + v * y[i], 0))
+  return inv.map(row => row.reduce((s, v, i) => s + v * Xty[i], 0))
+&#125;
+
+// 학습 데이터 — leakage 방지로 record 이전 데이터만 사용
+for (const record of allRecords) &#123;
+  const prevRecs     = orgRecs.filter(r =&gt; r.실시날짜 &lt; record.실시날짜)
+  const prevAllRecs  = allRecords.filter(r =&gt; r.실시날짜 &lt; record.실시날짜)
+  const base         = org.회당평균
+  const seasonal     = calcSeasonalFactor(month, year, prevAllRecs)
+  const dow          = calcDayOfWeekFactor(dayOfWeek, prevRecs)
+  const cycle        = calcCycleFactor(lastDate, record.실시날짜, org.주기평균 || 30)
+  const globalTrend  = calcGlobalTrendFactor(record.실시날짜, prevAllRecs)
+  const localTrend   = calcLocalTrendFactor(prevRecs)
+
+  X.push([1, Math.log(Math.max(1, base)), seasonal, dow, cycle, globalTrend, localTrend])
+  y.push(Math.log(Math.max(1, record.헌혈인원)))
+&#125;
+      </code></pre> <p> <strong>leakage 방지</strong>: <code>record.실시날짜</code> 이전 데이터만으로 팩터를 계산한다.
+        미래 정보를 학습 데이터에 섞지 않기 위함 — 안 그러면 backtest 성능이 과대평가된다.
+</p> <h4>(e) 한계 — Ridge가 풀지 못하는 것</h4> <ul> <li><strong>비선형 상호작용</strong> — "특정 단체가 여름에만 높다" 같은 트리 상호작용은 GBT가 더 잘 잡는다. <code>PREDICTION_ROADMAP.md</code>의 Phase 3에서 LightGBM 도입 계획.</li> <li><strong>α 민감도</strong> — 현재 0.1 고정. 데이터 분포에 따라 α 튜닝이 필요할 수 있음.</li> <li><strong>외부 변수 부재</strong> — <em>날씨·특별 캠페인</em>은 포함되지 않음. <em>how-many-blood</em> 의 날씨 기반 예측과 결합하면 MAPE 추가 개선 가능.</li> <li><strong>300건 미만</strong> — Ridge 발동 불가, Heuristic으로 폴백.</li> </ul> <p class="callout">
+결과 객체에 <code>factors</code> · <code>weights</code> · <code>modelType</code> · <code>confidence</code> · <code>formulaText</code> 가 모두 포함되어,
+        툴팁에서 <em>"왜 이 예측값이 나왔는가"</em>를 직원이 이해할 수 있다.
+</p> </section> <section class="section"> <h2>4. 데이터 현황과 향후 (Phase 3)</h2> <ul> <li><strong>현재</strong>: 2025.01 ~ 현재 (14개월), Ridge 회귀 발동 가능한 데이터량 확보</li> <li><strong>계절성 학습 한계</strong>: 14개월은 3년 권장치에 못 미침. 1년 데이터는 패턴 포착 OK, 2년은 노이즈 분리 가능, 3년은 안정적 계절성.</li> <li><strong>Phase 3 계획</strong> (<code>PREDICTION_ROADMAP.md</code>):
+<ul> <li>Gradient Boosted Trees (LightGBM) 도입 — 비선형 상호작용 포착</li> <li>기존 단체 주소 정보를 사내 API에서 자동 수집 (현재 CSV 수동)</li> <li>전국 통합 모델 — 혈액관리본부 공개 데이터로 글로벌 추세 학습</li> <li>Cold-start — 헌혈 이력 없는 신편성 단체는 유사 단체군 평균으로 초기 예측</li> </ul> </li> </ul> <p class="callout">
+Ridge 회귀(현재) MAPE ~25%, 단순 GBT 도입 시 ~18%, 앙상블 GBT ~12%, 전국 통합 모델 ~8%를
+        데이터 요구량 기준으로 단계화.
+</p> </section> <section class="section"> <h2>5. 구현 디테일</h2> <ul> <li><strong>예측 엔진은 외부 ML 라이브러리 없음.</strong> 순수 JS — 브라우저에서 즉시 동작, 번들 사이즈 무관.</li> <li><strong>데이터 입력 경로</strong>: CSV 업로드(엑셀에서 export) 또는 모달로 수동 추가. 기록 단위 = 1회 행사.</li> <li><strong>시각화</strong>: 단체별 헌혈 추이(라인), 카테고리별 분포(도넛), 점수화 카드(Badge).</li> <li><strong>필터</strong>: 기간·지역·단체구분·배차 대수 범위·주기 일치 여부 등 7종.</li> <li><strong>오프라인 대응</strong>: Firebase 동기화 + IndexedDB 캐시. 네트워크 단절 시에도 기존 데이터로 조회·예측 가능.</li> </ul> </section> <section class="section"> <h2>6. 레포지토리</h2> <div class="repo-grid"> <a class="repo-card" href="https://github.com/a7garden/red-toolkit" target="_blank" rel="noopener noreferrer"> <h4>red-toolkit <span class="badge">React · Mantine · Firebase</span></h4> <p>3개 도구 (8주 계산, 학교 시간표, 단체 분석/예측) + Ridge 회귀 예측 엔진 + 로드맵 문서.</p> <code>a7garden/red-toolkit</code> </a> </div> </section> <section class="section"> <h2>7. 관련 문서</h2> <ul> <li><code>PREDICTION_ROADMAP.md</code> — 현 아키텍처, 데이터 한계, GBT 도입 계획, 5년 인프라 비용 추정.</li> <li><code>filter-schools.js</code> — 학교 코드/지역 매핑 스크립트.</li> </ul> </section> </main> <footer class="site-footer"> <p>© 2026 a7garden · Portfolio</p> </footer>  </body></html>

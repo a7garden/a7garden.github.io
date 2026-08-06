@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 320" width="860" height="320" font-family="-apple-system, BlinkMacSystemFont, Pretendard, Inter, sans-serif">
+  <rect width="860" height="320" fill="#0b0d10"/>
+  <text x="20" y="28" fill="#e6e8eb" font-size="15" font-weight="600">Ridge 회귀 학습 흐름 — 데이터 300건 이상 시 자동 활성화</text>
+  <text x="20" y="48" fill="#a4adb8" font-size="11">trainRidgeModel(allRecords, organizationsMap) → closed-form 해 w* = (XᵀX + αI)⁻¹ Xᵀy</text>
+
+  <g font-size="11">
+    <!-- inputs -->
+    <rect x="20" y="80" width="170" height="120" rx="10" fill="#14181d" stroke="#252c34"/>
+    <text x="105" y="104" fill="#d62828" font-size="12" font-weight="700" text-anchor="middle">① 학습 데이터 구성</text>
+    <line x1="40" y1="120" x2="170" y2="120" stroke="#252c34"/>
+    <text x="105" y="138" fill="#a4adb8" text-anchor="middle">각 record에 대해</text>
+    <text x="105" y="154" fill="#a4adb8" text-anchor="middle">prevRecs만으로</text>
+    <text x="105" y="170" fill="#a4adb8" text-anchor="middle">팩터 계산</text>
+    <text x="105" y="186" fill="#fcd34d" font-size="10" text-anchor="middle">(leakage 방지)</text>
+
+    <rect x="210" y="80" width="180" height="120" rx="10" fill="#14181d" stroke="#252c34"/>
+    <text x="300" y="104" fill="#d62828" font-size="12" font-weight="700" text-anchor="middle">② 설계 행렬 X</text>
+    <line x1="230" y1="120" x2="370" y2="120" stroke="#252c34"/>
+    <text x="300" y="140" fill="#a4adb8" text-anchor="middle">[1, log(Base), Seasonal,</text>
+    <text x="300" y="156" fill="#a4adb8" text-anchor="middle">DayOfWeek, CycleFactor,</text>
+    <text x="300" y="172" fill="#a4adb8" text-anchor="middle">GlobalTrend, LocalTrend]</text>
+    <text x="300" y="190" fill="#fcd34d" font-size="10" text-anchor="middle">y = log(헌혈인원)</text>
+
+    <rect x="410" y="80" width="170" height="120" rx="10" fill="#14181d" stroke="#252c34"/>
+    <text x="495" y="104" fill="#d62828" font-size="12" font-weight="700" text-anchor="middle">③ Ridge 가중치</text>
+    <line x1="430" y1="120" x2="570" y2="120" stroke="#252c34"/>
+    <text x="495" y="140" fill="#a4adb8" text-anchor="middle">XᵀX + αI  (α=0.1)</text>
+    <text x="495" y="156" fill="#a4adb8" text-anchor="middle">→ 역행렬</text>
+    <text x="495" y="172" fill="#a4adb8" text-anchor="middle">→ Xᵀy</text>
+    <text x="495" y="190" fill="#e6e8eb" font-weight="600" text-anchor="middle">w* = (XᵀX+αI)⁻¹Xᵀy</text>
+
+    <rect x="600" y="80" width="240" height="120" rx="10" fill="#14181d" stroke="#252c34"/>
+    <text x="720" y="104" fill="#d62828" font-size="12" font-weight="700" text-anchor="middle">④ 모델 결과</text>
+    <line x1="620" y1="120" x2="820" y2="120" stroke="#252c34"/>
+    <text x="720" y="140" fill="#a4adb8" text-anchor="middle">weights: [w₀, w₁, ..., w₆]</text>
+    <text x="720" y="156" fill="#a4adb8" text-anchor="middle">modelType: 'ridge' | 'manual'</text>
+    <text x="720" y="172" fill="#a4adb8" text-anchor="middle">trainSize: X.length</text>
+    <text x="720" y="190" fill="#7c5cff" font-size="10" text-anchor="middle">confidence = 1 − 1/(1+trainSize/100)</text>
+
+    <g stroke="#d62828" stroke-width="1.4" fill="none">
+      <path d="M190 140 L210 140" marker-end="url(#arr)"/>
+      <path d="M390 140 L410 140" marker-end="url(#arr)"/>
+      <path d="M580 140 L600 140" marker-end="url(#arr)"/>
+    </g>
+
+    <!-- bottom: usage -->
+    <rect x="180" y="220" width="500" height="80" rx="10" fill="#14181d" stroke="#252c34"/>
+    <text x="430" y="244" fill="#e6e8eb" font-size="12" font-weight="700" text-anchor="middle">⑤ 예측 적용 (predictDonors)</text>
+    <text x="430" y="264" fill="#a4adb8" font-size="11" text-anchor="middle">ridge 모델 있으면: ŷ = exp(w₀ + w₁·log(Base) + w₂·S + w₃·D + w₄·C + w₅·G + w₆·L)</text>
+    <text x="430" y="282" fill="#a4adb8" font-size="11" text-anchor="middle">없으면: ŷ = Base × S_seasonal × S_dow × S_cycle × S_global × S_local (heuristic)</text>
+
+    <path d="M495 200 L495 220" stroke="#d62828" stroke-width="1.4" fill="none" marker-end="url(#arr)"/>
+  </g>
+  <defs>
+    <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 z" fill="#d62828"/>
+    </marker>
+  </defs>
+</svg>
