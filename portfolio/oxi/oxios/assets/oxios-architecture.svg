@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" font-family="-apple-system, system-ui, sans-serif">
+  <style>
+    .box { fill: #14181d; stroke: #252c34; stroke-width: 1; rx: 8; }
+    .accent { fill: rgba(124, 92, 255, 0.12); stroke: #7c5cff; stroke-width: 1.5; rx: 8; }
+    .arrow { fill: none; stroke: #7c5cff; stroke-width: 1.5; }
+    .label { fill: #e6e8eb; font-size: 13px; font-weight: 600; }
+    .sub { fill: #a4adb8; font-size: 10px; }
+    .tier { fill: #6c7682; font-size: 10px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+  </style>
+
+  <text class="tier" x="20" y="20">CHANNELS</text>
+  <rect class="box" x="20" y="30" width="120" height="40" rx="6"/>
+  <text class="label" x="80" y="55" text-anchor="middle">Web</text>
+  <rect class="box" x="150" y="30" width="120" height="40" rx="6"/>
+  <text class="label" x="210" y="55" text-anchor="middle">CLI</text>
+  <rect class="box" x="280" y="30" width="120" height="40" rx="6"/>
+  <text class="label" x="340" y="55" text-anchor="middle">Telegram</text>
+
+  <text class="tier" x="20" y="100">GATEWAY</text>
+  <rect class="box" x="20" y="110" width="380" height="50" rx="6"/>
+  <text class="label" x="210" y="140" text-anchor="middle">oxios-gateway · channel-agnostic router</text>
+
+  <text class="tier" x="20" y="190">KERNEL</text>
+  <rect class="accent" x="20" y="200" width="600" height="120" rx="8"/>
+  <text class="label" x="40" y="225">Kernel · Orchestrator + Supervisor + 13 subsystems</text>
+  <text class="sub" x="40" y="245">Scheduler · EventBus · StateStore · AccessMgr · AuditTrail</text>
+  <text class="sub" x="40" y="262">BudgetMgr · ResourceMon · MemoryMgr · SpaceMgr · McpBridge</text>
+  <text class="sub" x="40" y="279">GitLayer · PersonaMgr · SkillMgr · CronScheduler</text>
+  <text class="sub" x="40" y="296">AuthManager · CircuitBreaker · A2AProtocol + CardRegistry</text>
+  <rect class="box" x="420" y="220" width="180" height="50" rx="6"/>
+  <text class="label" x="510" y="245" text-anchor="middle">KernelHandle</text>
+  <text class="sub" x="510" y="262" text-anchor="middle">13 typed APIs</text>
+
+  <text class="tier" x="650" y="190" style="text-anchor:end;">RUNTIME</text>
+  <rect class="box" x="650" y="200" width="130" height="50" rx="6"/>
+  <text class="label" x="715" y="225" text-anchor="middle">Ouroboros</text>
+  <text class="sub" x="715" y="242" text-anchor="middle">spec-first</text>
+
+  <text class="tier" x="650" y="280" style="text-anchor:end;">ENGINE</text>
+  <rect class="box" x="650" y="290" width="130" height="50" rx="6"/>
+  <text class="label" x="715" y="315" text-anchor="middle">oxi-sdk</text>
+  <text class="sub" x="715" y="332" text-anchor="middle">+ oxi-ai</text>
+
+  <path class="arrow" d="M 210 80 L 210 110" marker-end="url(#a)"/>
+  <path class="arrow" d="M 210 160 L 210 200" marker-end="url(#a)"/>
+  <path class="arrow" d="M 320 260 L 650 225" marker-end="url(#a)"/>
+  <path class="arrow" d="M 715 250 L 715 290" marker-end="url(#a)"/>
+
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#7c5cff"/>
+    </marker>
+  </defs>
+</svg>

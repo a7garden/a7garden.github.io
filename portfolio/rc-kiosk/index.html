@@ -1,0 +1,37 @@
+<!DOCTYPE html><html lang="ko"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><title>RC Kiosk — 헌혈의 집 기념품 선택 키오스크 + 관리자 백오피스</title><meta name="description" content="헌혈자가 직접 기념품을 고르는 셀프 키오스크와, 동일 Supabase DB를 공유하는 관리자 백오피스. 하나의 제품, 두 개의 얼굴."><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/variable/woff2/SUIT-Variable.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/geist-mono@5/index.css"><link rel="stylesheet" href="/_astro/index.DB04cqhc.css"></head> <body>  <header class="site-header"> <a class="back" href="/red-cross-works/">← Red Cross Works</a> </header> <main> <section class="hero"> <p class="eyebrow">Kiosk Product · React · Vite · Supabase · Tailwind</p> <h1>RC Kiosk</h1> <p class="lede">
+헌혈의 집에서 <strong>헌혈자가 직접 기념품을 고르는 셀프 키오스크</strong>와,
+        그 운영을 한 곳에서 관리하는 <strong>관리자 백오피스</strong>. 두 앱은
+<em>동일한 Supabase DB</em>를 공유하는 하나의 제품이다 — 관리자가 비활성화한
+        기념품은 즉시 키오스크에서 사라진다.
+</p> <div class="meta"> <dl> <dt>역할</dt><dd>개인 프로젝트 — 키오스크(사용자) + 백오피스(관리자) 전부 단독 설계/구현</dd> <dt>공통 스택</dt><dd>React 18 · Vite · TypeScript · Tailwind CSS · Supabase · Firebase Hosting</dd> <dt>백엔드</dt><dd>Supabase (gift_items / donation_locations / donation_records)</dd> <dt>라우팅</dt><dd>HashRouter — 지점별 단축 URL <code>/#/location/&#123;locationId&#125;</code></dd> <dt>레포</dt><dd><code>a7garden/rc-kiosk-app</code> · <code>a7garden/rc-kiosk-admin-app</code></dd> </dl> </div> </section> <section class="section"> <h2>1. 화면</h2> <p>왼쪽은 헌혈자가 보는 키오스크, 오른쪽은 직원이 보는 관리자 백오피스. 같은 데이터, 다른 관점.</p> <figure class="figure"> <img src="/rc-kiosk/assets/kiosk.png" alt="RC Kiosk 사용자 키오스크 — 진행 단계 사이드바, A/B 그룹 기념품 그리드, 이름 입력"> <figcaption>사용자 키오스크 — 서울센터 헌혈의 집 진입 화면. A 3품목 + B 1품목 표시, 선택 기준 / 이름 입력 영역. URL <code>/#/location/loc-001</code></figcaption> </figure> <figure class="figure"> <img src="/rc-kiosk/assets/kiosk-name.png" alt="RC Kiosk 사용자 키오스크 — A 1개 + B 1개 선택 후 이름 입력 단계"> <figcaption>사용자 키오스크 — A 1개 + B 1개 선택 후 이름 입력 단계. 선택된 기념품 칩과 이름 입력란 동시 표시</figcaption> </figure> <figure class="figure"> <img src="/rc-kiosk/assets/admin.png" alt="RC Kiosk 관리자 백오피스 — 키오스크 링크/QR 관리, 지점별 활성화 토글"> <figcaption>관리자 백오피스 — 기본 탭(기념품 키오스크). 5개 지점의 QR 카드 + 지점별 URL/QR 다운로드</figcaption> </figure> <figure class="figure"> <img src="/rc-kiosk/assets/admin-records.png" alt="RC Kiosk 관리자 백오피스 — 선택 기록(AdminRecords) 화면"> <figcaption>관리자 백오피스 — 선택 기록 탭. 헌혈자 이름 / 선택 기념품 / 위치 / 시각을 표로 조회</figcaption> </figure> <figure class="figure"> <img src="/rc-kiosk/assets/admin-bulk.png" alt="RC Kiosk 관리자 백오피스 — 기념품 일괄 관리(BulkItemManager) 화면"> <figcaption>관리자 백오피스 — 기념품 일괄 관리 탭. 지점별 / 전 지점 공통 기념품 등록·정렬</figcaption> </figure> </section> <section class="section"> <h2>2. 문제</h2> <p>
+기존에는 헌혈자가 기념품을 고르면 직원이 종이로 받아 적고, 재고는 엑셀로 수동 관리했다.
+        헌혈의 집마다 기념품 구성이 다르고, A/B 그룹(단일 선택 vs 다중 선택) 정책도 달라
+<em>현장마다 매번 설명·기록·재고 차감</em>이 반복됐다. 이걸 키오스크로 자동화하되,
+        운영자가 지점·기념품·재고를 직접 통제할 수 있는 백오피스를 함께 만들었다.
+</p> </section> <section class="section"> <h2>3. 사용자 키오스크 (rc-kiosk-app)</h2> <h3>3.1 동작 흐름</h3> <ol> <li><strong>지점 식별</strong> — 단축 URL의 <code>locationId</code>로 <code>donation_locations</code> 조회, 지점명 표시.</li> <li><strong>기념품 목록 로드</strong> — <code>gift_items</code>에서 해당 지점에 활성화(<code>visible=true</code>)된 항목만 필터. 카테고리(A/B), 정렬순서, 다중 선택 가능 여부까지 모두 DB에서.</li> <li><strong>선택 → 검증</strong> — 카테고리별 1개(A 그룹) / 다중(B 그룹) 정책 적용, 선택 변경 시 Supabase에 재고 차감 요청.</li> <li><strong>이름 입력 → 제출</strong> — 선택 기록을 Supabase에 저장, 재고 차감 트랜잭션.</li> </ol> <h3>3.2 화면별 구현 디테일</h3> <ul> <li><strong>진행 단계 표시</strong> — 좌측 사이드바에 인증 → 선택 → 이름 → 제출 단계. 완료된 단계는 흐리게, 현재 단계는 강조.</li> <li><strong>기념품 카드</strong> — 카테고리, 이름, 설명, 선택 표시. 선택 시 적색 테두리 + 체크 배지.</li> <li><strong>A/B 그룹 필터 칩</strong> — 그룹 전환 시 즉시 카드 그리드 갱신.</li> <li><strong>에러 토스트</strong> — 재고 부족 / 네트워크 오류 시 3초간 자동 닫힘 메시지.</li> <li><strong>툴팁</strong> — 다중 선택 가능/불가 항목에 대한 안내.</li> </ul> </section> <section class="section"> <h2>4. 관리자 백오피스 (rc-kiosk-admin-app)</h2> <h3>4.1 MainLayout (사이드바)</h3> <p>
+4개 탭 — <strong>선택자(selector) / 선택 기록(records) / 일괄 아이템(bulkItems) / 로그인(login)</strong>.
+        활성 탭을 localStorage에 저장해 새로고침 시에도 유지.
+        키보드 포커스 트랩 + ESC 닫기 등 접근성 처리.
+</p> <h3>4.2 AdminRecords</h3> <p>헌혈자가 제출한 선택 기록 조회. 지점·기간·기념품별 필터, CSV 내보내기.</p> <h3>4.3 BulkItemManager</h3> <p>
+기념품 다중 등록/수정. <code>react-beautiful-dnd</code>로 카테고리·정렬 순서 드래그 편집.
+        이미지 선택 시 <code>ImageSelectorModal</code>로 미리보기/업로드.
+</p> <h3>4.4 GlobalItemManager</h3> <p>전 지점 공통 vs 지점별 기념품 분리 관리. 지점 활성화/비활성화 토글.</p> <h3>4.5 KioskLinks</h3> <p> <code>qrcode.react</code>로 각 지점 단축 URL의 QR을 즉시 생성 — 포스터에 인쇄해서 지점에 붙인다.
+        키오스크 점검 모드 진입/해제.
+</p> <h3>4.6 통계 (StatisticsModal)</h3> <p>
+일/주/월별 선택 수, 카테고리 비중, 인기 기념품 Top N. 대시보드 KPI와 일관되게 표시.
+</p> <h3>4.7 UX 디테일</h3> <ul> <li><strong>모달 우선</strong>: 일괄 등록·이미지 선택·통계는 모두 모달로 띄워 메인 흐름 끊김 없이.</li> <li><strong>드래그 정렬</strong>: 기념품 카테고리/순서를 드래그로 즉시 편집.</li> <li><strong>QR 즉시 생성</strong>: 지점 등록 시 바로 QR 미리보기 — 인쇄용 PDF export.</li> <li><strong>키보드 접근성</strong>: 사이드바 ESC 닫기, 포커스 트랩, 마지막 활성 탭 기억.</li> </ul> </section> <section class="section"> <h2>5. 공유 데이터 모델</h2> <p>두 앱은 같은 3개 테이블을 공유한다. 지점·기념품·재고가 분리되어 있어 양쪽이 항상 동기화된다.</p> <pre class="code"><code>gift_items &#123;
+  id, name, image_url, description,
+  category: "A" | "B",
+  sort_order, allow_multiple, visible
+&#125;
+
+donation_locations &#123;
+  id, name  -- 키오스크 단축 URL 진입점
+&#125;
+
+donation_records &#123;
+  id, location_id, item_ids, donor_name, created_at
+&#125;</code></pre> <p> <em>관리자가 비활성화한 기념품은 즉시 키오스크에서 사라진다</em> — 별도 캐시 없이.
+        Tailwind 색상 토큰은 적십자 팬톤 팔레트(<code>redCrossRed</code>, <code>redCrossWarmGray</code>,
+<code>redCrossGold</code>)만 사용해 시각 일관성을 유지했다.
+</p> </section> <section class="section"> <h2>6. 배포</h2> <ul> <li><strong>Firebase Hosting</strong> 정적 호스팅 (<code>firebase deploy --only hosting</code>).</li> <li><strong>지점별 단축 URL</strong> — 각 헌혈의 집에 QR/포스터로 배포. 키오스크 PC 브라우저에서 바로 진입.</li> <li><strong>환경 변수</strong> — <code>VITE_SUPABASE_URL</code>, <code>VITE_SUPABASE_ANON_KEY</code>만 주입. 키 값은 레포 밖.</li> <li><strong>인증</strong> — localStorage 기반 isAdmin 플래그 (사내 사용 한정). 프로덕션 인증은 별도 라우터.</li> </ul> </section> <section class="section"> <h2>7. 레포지토리</h2> <div class="repo-grid"> <a class="repo-card" href="https://github.com/a7garden/rc-kiosk-app" target="_blank" rel="noopener noreferrer"> <h4>rc-kiosk-app <span class="badge">사용자 키오스크 · React · Supabase</span></h4> <p>헌혈자용 셀프 키오스크. 지점별 단축 URL · A/B 카테고리 필터 · 다중 선택 · 재고 실시간 차감.</p> <code>a7garden/rc-kiosk-app</code> </a> <a class="repo-card" href="https://github.com/a7garden/rc-kiosk-admin-app" target="_blank" rel="noopener noreferrer"> <h4>rc-kiosk-admin-app <span class="badge">관리자 백오피스 · React · Supabase</span></h4> <p>관리자용 백오피스. 기념품/지점/선택기록/통계 관리 + 키오스크 QR 링크 생성. 동일 DB.</p> <code>a7garden/rc-kiosk-admin-app</code> </a> </div> </section> </main> <footer class="site-footer"> <p>© 2026 a7garden · Portfolio</p> </footer>  </body></html>

@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 460" font-family="-apple-system, system-ui, sans-serif">
+  <style>
+    .box { fill: #14181d; stroke: #252c34; stroke-width: 1; rx: 8; }
+    .accent { fill: rgba(124, 92, 255, 0.12); stroke: #7c5cff; stroke-width: 1.5; rx: 8; }
+    .arrow { fill: none; stroke: #7c5cff; stroke-width: 1.5; }
+    .dim { fill: none; stroke: #6c7682; stroke-width: 1; stroke-dasharray: 4 4; }
+    .label { fill: #e6e8eb; font-size: 13px; font-weight: 600; }
+    .sub { fill: #a4adb8; font-size: 10px; }
+    .tier { fill: #6c7682; font-size: 10px; font-weight: 600; letter-spacing: 0.04em; }
+  </style>
+
+  <!-- Tier labels -->
+  <text class="tier" x="40" y="30">FOUNDATION TIER</text>
+  <text class="tier" x="40" y="180">CORE ENGINE TIER</text>
+  <text class="tier" x="40" y="310">USER APPS TIER</text>
+
+  <!-- Layer 1: oxibrowser + oxicode-sdk (both foundations, no mutual deps) -->
+  <rect class="accent" x="60" y="50" width="200" height="80" rx="8"/>
+  <text class="label" x="160" y="80" text-anchor="middle">oxibrowser</text>
+  <text class="sub" x="160" y="98" text-anchor="middle">pure-Rust headless browser</text>
+  <text class="sub" x="160" y="114" text-anchor="middle">24MB single binary · CDP-compatible</text>
+
+  <rect class="accent" x="300" y="50" width="220" height="80" rx="8"/>
+  <text class="label" x="410" y="80" text-anchor="middle">oxicode-sdk</text>
+  <text class="sub" x="410" y="98" text-anchor="middle">multi-agent SDK · message bus</text>
+  <text class="sub" x="410" y="114" text-anchor="middle">builder pattern · port adapters</text>
+
+  <rect class="accent" x="560" y="50" width="240" height="80" rx="8"/>
+  <text class="label" x="680" y="80" text-anchor="middle">oxi-sdk (외부 crates.io)</text>
+  <text class="sub" x="680" y="98" text-anchor="middle">provider/model resolution</text>
+  <text class="sub" x="680" y="114" text-anchor="middle">unified LLM API</text>
+
+  <!-- Layer 2: oxicode CLI/TUI + oxios kernel — both depend on oxibrowser AND oxicode-sdk -->
+  <rect class="box" x="120" y="200" width="220" height="70" rx="8"/>
+  <text class="label" x="230" y="232" text-anchor="middle">oxicode (CLI/TUI)</text>
+  <text class="sub" x="230" y="250" text-anchor="middle">Rust port of pi</text>
+  <text class="sub" x="230" y="264" text-anchor="middle">oxicode-agent → oxibrowser</text>
+
+  <rect class="box" x="400" y="200" width="280" height="70" rx="8"/>
+  <text class="label" x="540" y="232" text-anchor="middle">oxios (Agent OS)</text>
+  <text class="sub" x="540" y="250" text-anchor="middle">Supervisor · Ouroboros · A2A</text>
+  <text class="sub" x="540" y="264" text-anchor="middle">oxibrowser + oxicode-sdk 합성</text>
+
+  <!-- Layer 3: user apps -->
+  <rect class="box" x="40" y="330" width="180" height="60" rx="8"/>
+  <text class="label" x="130" y="358" text-anchor="middle">oximemo</text>
+  <text class="sub" x="130" y="376" text-anchor="middle">memo · macOS · Tauri 2</text>
+
+  <rect class="box" x="240" y="330" width="180" height="60" rx="8"/>
+  <text class="label" x="330" y="358" text-anchor="middle">oxiline</text>
+  <text class="sub" x="330" y="376" text-anchor="middle">routine · macOS · Tauri v2</text>
+
+  <rect class="box" x="440" y="330" width="180" height="60" rx="8"/>
+  <text class="label" x="530" y="358" text-anchor="middle">oxibuilder</text>
+  <text class="sub" x="530" y="376" text-anchor="middle">SSG · React 19 · CLI</text>
+
+
+  <!-- Arrows: oxicode depends on BOTH oxibrowser AND oxicode-sdk -->
+  <path class="arrow" d="M 160 130 L 200 200" marker-end="url(#a)"/>
+  <path class="arrow" d="M 380 130 L 280 200" marker-end="url(#a)"/>
+
+  <!-- Arrows: oxios depends on BOTH oxibrowser AND oxicode-sdk AND oxi-sdk -->
+  <path class="arrow" d="M 240 130 L 460 200" marker-end="url(#a)"/>
+  <path class="arrow" d="M 480 130 L 540 200" marker-end="url(#a)"/>
+  <path class="arrow" d="M 680 130 L 580 200" marker-end="url(#a)"/>
+
+  <!-- Arrows: oxicode-cli / oxios → user apps (design influence) -->
+  <path class="dim" d="M 230 270 L 130 330" marker-end="url(#b)"/>
+  <path class="dim" d="M 270 270 L 330 330" marker-end="url(#b)"/>
+  <path class="dim" d="M 540 270 L 530 330" marker-end="url(#b)"/>
+
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#7c5cff"/>
+    </marker>
+    <marker id="b" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#6c7682"/>
+    </marker>
+  </defs>
+</svg>

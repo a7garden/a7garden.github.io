@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 260" font-family="-apple-system, system-ui, sans-serif">
+  <style>
+    .box { fill: #14181d; stroke: #252c34; stroke-width: 1; rx: 8; }
+    .arrow { fill: none; stroke: #7c5cff; stroke-width: 1.5; }
+    .label { fill: #e6e8eb; font-size: 14px; font-weight: 600; }
+    .sub { fill: #a4adb8; font-size: 11px; }
+  </style>
+  <rect class="box" x="40" y="40" width="140" height="60" rx="8"/>
+  <text class="label" x="110" y="68" text-anchor="middle">oxicode-cli</text>
+  <text class="sub" x="110" y="86" text-anchor="middle">CLI binary</text>
+
+  <rect class="box" x="240" y="40" width="140" height="60" rx="8"/>
+  <text class="label" x="310" y="68" text-anchor="middle">oxicode-sdk</text>
+  <text class="sub" x="310" y="86" text-anchor="middle">Multi-agent SDK</text>
+
+  <rect class="box" x="440" y="40" width="140" height="60" rx="8"/>
+  <text class="label" x="510" y="68" text-anchor="middle">oxicode-agent</text>
+  <text class="sub" x="510" y="86" text-anchor="middle">Runtime · MCP</text>
+
+  <rect class="box" x="640" y="40" width="120" height="60" rx="8"/>
+  <text class="label" x="700" y="68" text-anchor="middle">oxicode-ai</text>
+  <text class="sub" x="700" y="86" text-anchor="middle">8 providers</text>
+
+  <path class="arrow" d="M 180 70 L 240 70" marker-end="url(#a)"/>
+  <path class="arrow" d="M 380 70 L 440 70" marker-end="url(#a)"/>
+  <path class="arrow" d="M 580 70 L 640 70" marker-end="url(#a)"/>
+
+  <rect class="box" x="240" y="170" width="140" height="60" rx="8"/>
+  <text class="label" x="310" y="198" text-anchor="middle">oxicode-tui</text>
+  <text class="sub" x="310" y="216" text-anchor="middle">Ratatui UI</text>
+
+  <path class="arrow" d="M 310 100 L 310 170" marker-end="url(#a)"/>
+
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#7c5cff"/>
+    </marker>
+  </defs>
+</svg>

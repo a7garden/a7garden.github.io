@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 360" font-family="-apple-system, system-ui, sans-serif">
+  <style>
+    .box { fill: #14181d; stroke: #252c34; stroke-width: 1; rx: 6; }
+    .accent { fill: rgba(124, 92, 255, 0.15); stroke: #7c5cff; stroke-width: 1.5; rx: 6; }
+    .arrow { fill: none; stroke: #7c5cff; stroke-width: 1.5; }
+    .parked { fill: #0b0d10; stroke: #252c34; stroke-width: 1; stroke-dasharray: 4 4; rx: 6; }
+    .label { fill: #e6e8eb; font-size: 12px; font-weight: 600; }
+    .sub { fill: #a4adb8; font-size: 10px; }
+    .step { fill: #7c5cff; font-size: 11px; font-weight: 700; letter-spacing: 0.05em; }
+    .key { fill: #14181d; stroke: #7c5cff; stroke-width: 1.5; rx: 4; }
+    .key text { fill: #7c5cff; font-size: 10px; font-weight: 700; text-anchor: middle; }
+    .tiny { fill: #6c7682; font-size: 9px; }
+    .time { fill: #6c7682; font-size: 9px; font-style: italic; }
+  </style>
+
+  <text class="step" x="40" y="30">STEP 1 · IDLE</text>
+  <text class="label" x="40" y="52">사용자가 일반 작업 중</text>
+
+  <!-- 일반 작업 윈도우 (Chrome) -->
+  <rect class="box" x="40" y="80" width="160" height="100" rx="6"/>
+  <rect fill="#252c34" x="40" y="80" width="160" height="14" rx="6"/>
+  <circle cx="50" cy="87" r="2" fill="#6c7682"/>
+  <circle cx="58" cy="87" r="2" fill="#6c7682"/>
+  <circle cx="66" cy="87" r="2" fill="#6c7682"/>
+  <text class="sub" x="50" y="115">macOS desktop</text>
+  <text class="tiny" x="50" y="135">Chrome · Slack · Editor</text>
+
+  <!-- 캡처 윈도우는 off-screen에 parked -->
+  <rect class="parked" x="240" y="120" width="60" height="40" rx="6"/>
+  <text class="tiny" x="270" y="138" text-anchor="middle">capture window</text>
+  <text class="tiny" x="270" y="150" text-anchor="middle">parked · warm</text>
+
+  <text class="time" x="40" y="200">off-screen · NSEvent 글로벌 모니터 대기</text>
+
+
+  <text class="step" x="280" y="30">STEP 2 · ⌘⇧N PRESSED</text>
+  <text class="label" x="280" y="52">⌘⇧N trigger</text>
+
+  <!-- 키 press 표시 -->
+  <rect class="key" x="280" y="100" width="50" height="50" rx="6"/>
+  <text x="305" y="132" font-size="14" font-weight="700" fill="#7c5cff" text-anchor="middle">⌘⇧N</text>
+  <text class="tiny" x="305" y="165" text-anchor="middle">press</text>
+
+  <!-- 캡처 윈도우 아직 hidden -->
+  <rect class="parked" x="370" y="120" width="60" height="40" rx="6"/>
+  <text class="tiny" x="400" y="138" text-anchor="middle">still parked</text>
+  <text class="tiny" x="400" y="150" text-anchor="middle">last_release = t0</text>
+
+  <text class="time" x="280" y="200">ShortcutState::Pressed · tauri-plugin-global-shortcut</text>
+
+
+  <text class="step" x="520" y="30">STEP 3 · CAPTURE WINDOW SHOW</text>
+  <text class="label" x="520" y="52">capture:show emit · 1-frame (≤16ms)</text>
+
+  <rect class="key" x="520" y="100" width="50" height="50" rx="6"/>
+  <text x="545" y="132" font-size="11" font-weight="700" fill="#7c5cff" text-anchor="middle">show</text>
+  <text class="tiny" x="545" y="165" text-anchor="middle">≤16ms</text>
+
+  <!-- 1프레임 안에 표시 -->
+  <rect class="accent" x="610" y="100" width="120" height="60" rx="6"/>
+  <text class="label" x="670" y="125" text-anchor="middle">capture window</text>
+  <text class="sub" x="670" y="142" text-anchor="middle">show · ≤16ms</text>
+  <text class="tiny" x="670" y="155" text-anchor="middle">input focused</text>
+
+  <text class="time" x="520" y="200">Tauri main thread · window.show() · first-frame paint</text>
+
+
+  <text class="step" x="760" y="30">STEP 4 · TYPE &amp; DISMISS</text>
+  <text class="label" x="760" y="52">한 줄 입력 → Esc</text>
+
+  <rect class="accent" x="760" y="100" width="160" height="80" rx="6"/>
+  <rect class="box" x="770" y="115" width="140" height="28" rx="4"/>
+  <text class="sub" x="778" y="133">A note|</text>
+  <text class="tiny" x="770" y="158">⌘↩ save · Esc dismiss</text>
+  <text class="tiny" x="770" y="172">window → hidden, not destroyed</text>
+
+  <text class="time" x="760" y="200">재트리거 시 즉시 표시 (warm)</text>
+
+  <!-- 흐름 화살표 -->
+  <path class="arrow" d="M 200 130 L 240 130" marker-end="url(#a)"/>
+  <path class="arrow" d="M 430 130 L 520 130" marker-end="url(#a)"/>
+  <path class="arrow" d="M 730 130 L 760 130" marker-end="url(#a)"/>
+
+  <!-- 하단 다이어그램 -->
+  <text class="sub" x="40" y="270">두 트리거 — ⌘⇧N (권한 불필요, 기본 안내) + ⌥ 더블탭 (Accessibility 권한 필요):</text>
+  <text class="tiny" x="40" y="290">• capture NSWindow는 <tspan font-weight="700" fill="#e6e8eb">parked (hidden)</tspan> 상태로 항상 떠 있음. destroy 안 됨 → cold-start 비용 없음 (두 트리거 모두 같은 warm 윈도우를 show)</text>
+  <text class="tiny" x="40" y="305">• <tspan font-weight="700" fill="#e6e8eb">⌘⇧N</tspan>: <tspan font-weight="700" fill="#e6e8eb">tauri-plugin-global-shortcut</tspan>으로 항상 등록 (권한 불필요, 모든 macOS 사용자에게 동작) — DESIGN.md §6.4 "상시 접근"의 기본 안내</text>
+  <text class="tiny" x="40" y="320">• <tspan font-weight="700" fill="#e6e8eb">⌥ 더블탭</tspan>: NSEvent 글로벌 모니터 (FlagsChanged) + threshold 350ms 이내 두 번의 press/release 쌍. Accessibility 권한이 없으면 비활성. 다른 워크플로와 충돌 시 끌 수 있고 그 경우 ⌘⇧N만 남는다</text>
+  <text class="tiny" x="40" y="335">• 출처: apps/desktop/src-tauri/src/lib.rs:115/242-243 (⌘⇧N 등록 + default_shortcut), crates/oximemo-capture/src/macos.rs:80-109 (⌥ 더블탭), apps/desktop/src/components/CaptureOverlay.tsx (off-screen warm), apps/desktop/src/lib/window.ts (parked, never destroyed), doc/DESIGN.md §6.4</text>
+
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#7c5cff"/>
+    </marker>
+  </defs>
+</svg>
