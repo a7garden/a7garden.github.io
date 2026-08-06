@@ -29,3 +29,7 @@ jobs:
           path: .
       - id: deploy
         uses: actions/deploy-pages@v4
+        with:
+          # 68MB static site (posters/covers/portfolio) can take ~12m to
+          # publish; the default 600000ms (10m) cuts it off mid-deploy.
+          timeout: 1800000
