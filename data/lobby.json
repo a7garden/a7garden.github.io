@@ -1,0 +1,127 @@
+{
+  "site": {
+    "name": "a7garden",
+    "base_url": "https://a7garden.github.io",
+    "default_lang": "ko",
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "layout": "shell"
+  },
+  "extensions": [
+    {
+      "id": "profile",
+      "display_name": {
+        "ko": "프로필",
+        "en": "Profile"
+      },
+      "lobby": {
+        "enabled": true,
+        "display_mode": "grid",
+        "display_order": 0,
+        "style_params": {}
+      }
+    },
+    {
+      "id": "blog",
+      "display_name": {
+        "ko": "블로그",
+        "en": "Blog"
+      },
+      "lobby": {
+        "enabled": true,
+        "display_mode": "grid",
+        "display_order": 1,
+        "style_params": {}
+      }
+    },
+    {
+      "id": "projects",
+      "display_name": {
+        "ko": "프로젝트",
+        "en": "Projects"
+      },
+      "lobby": {
+        "enabled": true,
+        "display_mode": "grid",
+        "display_order": 2,
+        "style_params": {}
+      }
+    },
+    {
+      "id": "links",
+      "display_name": {
+        "ko": "링크",
+        "en": "Links"
+      },
+      "lobby": {
+        "enabled": true,
+        "display_mode": "grid",
+        "display_order": 3,
+        "style_params": {}
+      }
+    },
+    {
+      "id": "movies",
+      "display_name": {
+        "ko": "영화",
+        "en": "Movies"
+      },
+      "lobby": {
+        "enabled": true,
+        "display_mode": "grid",
+        "display_order": 5,
+        "style_params": {}
+      }
+    },
+    {
+      "id": "books",
+      "display_name": {
+        "ko": "책",
+        "en": "Books"
+      },
+      "lobby": {
+        "enabled": true,
+        "display_mode": "grid",
+        "display_order": 6,
+        "style_params": {}
+      }
+    }
+  ],
+  "mounts": [
+    {
+      "id": "portfolio",
+      "display_name": {
+        "ko": "포트폴리오",
+        "en": "Portfolio"
+      },
+      "path": "portfolio",
+      "description": "Selected work & experiments",
+      "icon": null,
+      "open_in_new_tab": false
+    },
+    {
+      "id": "movies",
+      "display_name": {
+        "ko": "영화 기록",
+        "en": "Movies"
+      },
+      "path": "movies",
+      "description": "영화·드라마 감상 기록",
+      "icon": null,
+      "open_in_new_tab": false
+    },
+    {
+      "id": "books",
+      "display_name": {
+        "ko": "도서 기록",
+        "en": "Books"
+      },
+      "path": "books",
+      "description": "독서 기록",
+      "icon": null,
+      "open_in_new_tab": false
+    }
+  ]
+}

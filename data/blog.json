@@ -1,0 +1,37 @@
+{
+  "posts": [
+    {
+      "body": "The blog is live.\n\nThis site is built as a static bundle with oxibuilder and deployed to GitHub Pages. Posts are written in Markdown; Korean and English versions are linked, so you can switch languages from the toggle in the header.\n\nThis is where I'll post project notes and misc thoughts.\n",
+      "category": "News",
+      "created_at": "2026-09-14T14:21:38.942Z",
+      "id": 3,
+      "lang": "en",
+      "published_at": "2026-09-14T14:21:46.822Z",
+      "series_id": null,
+      "series_order": null,
+      "slug": "hello--blog",
+      "tags": [],
+      "title": "Hello, Blog",
+      "translation_group_id": 1,
+      "updated_at": "2026-09-14T14:21:46.822Z"
+    },
+    {
+      "body": "블로그를 시작했습니다.\n\n이 사이트는 oxibuilder로 정적 빌드해 GitHub Pages에 배포합니다. 글은 마크다운으로 쓰고, 발행하면 이 블로그 목록에 올라옵니다.\n\n프로젝트 작업 노트와 생각 정리를 기록할 공간입니다.\n",
+      "category": "소식",
+      "created_at": "2026-09-14T13:35:27.717Z",
+      "id": 1,
+      "lang": "ko",
+      "published_at": "2026-09-14T13:35:32.558Z",
+      "series_id": null,
+      "series_order": null,
+      "slug": "블로그-시작",
+      "tags": [
+        "소식"
+      ],
+      "title": "블로그 시작",
+      "translation_group_id": 1,
+      "updated_at": "2026-09-14T14:21:38.921Z"
+    }
+  ],
+  "series": []
+}

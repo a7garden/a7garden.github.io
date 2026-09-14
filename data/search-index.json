@@ -1,0 +1,18 @@
+[
+  {
+    "id": "blog/hello--blog",
+    "title": "Hello, Blog",
+    "body_preview": "The blog is live.This site is built as a static bundle with oxibuilder and deployed to GitHub Pages. Posts are written in Markdown; Korean and English versions are linked, so you can switch languages …",
+    "type": "blog",
+    "url": "/blog/hello--blog",
+    "published_at": "2026-09-14T14:21:46.822Z"
+  },
+  {
+    "id": "blog/블로그-시작",
+    "title": "블로그 시작",
+    "body_preview": "블로그를 시작했습니다.이 사이트는 oxibuilder로 정적 빌드해 GitHub Pages에 배포합니다. 글은 마크다운으로 쓰고, 발행하면 이 블로그 목록에 올라옵니다.프로젝트 작업 노트와 생각 정리를 기록할 공간입니다.",
+    "type": "blog",
+    "url": "/blog/블로그-시작",
+    "published_at": "2026-09-14T13:35:32.558Z"
+  }
+]

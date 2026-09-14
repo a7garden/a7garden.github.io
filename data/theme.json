@@ -1,0 +1,19 @@
+{
+  "definition": {
+    "accent_hue": 160.0,
+    "description_en": "Warm paper background, pine green accent",
+    "description_ko": "따뜻한 종이 배경, 파인 그린 악센트",
+    "id": "paper",
+    "mode": "light",
+    "name_en": "Paper",
+    "name_ko": "종이",
+    "preview_colors": [
+      "#fafaf5",
+      "#f5f2ed",
+      "#2d2934",
+      "#2d7a5c"
+    ]
+  },
+  "layout": "shell",
+  "theme_id": "paper"
+}
