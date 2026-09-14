@@ -61,32 +61,6 @@
         "display_order": 3,
         "style_params": {}
       }
-    },
-    {
-      "id": "movies",
-      "display_name": {
-        "ko": "영화",
-        "en": "Movies"
-      },
-      "lobby": {
-        "enabled": true,
-        "display_mode": "grid",
-        "display_order": 5,
-        "style_params": {}
-      }
-    },
-    {
-      "id": "books",
-      "display_name": {
-        "ko": "책",
-        "en": "Books"
-      },
-      "lobby": {
-        "enabled": true,
-        "display_mode": "grid",
-        "display_order": 6,
-        "style_params": {}
-      }
     }
   ],
   "mounts": [
