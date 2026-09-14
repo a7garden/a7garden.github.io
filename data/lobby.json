@@ -7,7 +7,8 @@
       "ko",
       "en"
     ],
-    "layout": "shell"
+    "layout": "shell",
+    "tagline": "personal space"
   },
   "extensions": [
     {

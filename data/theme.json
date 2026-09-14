@@ -1,19 +1,19 @@
 {
   "definition": {
-    "accent_hue": 160.0,
-    "description_en": "Warm paper background, pine green accent",
-    "description_ko": "따뜻한 종이 배경, 파인 그린 악센트",
-    "id": "paper",
-    "mode": "light",
-    "name_en": "Paper",
-    "name_ko": "종이",
+    "accent_hue": 250.0,
+    "description_en": "Deep night sky, blue accent",
+    "description_ko": "깊은 밤하늘, 블루 악센트",
+    "id": "midnight",
+    "mode": "dark",
+    "name_en": "Midnight",
+    "name_ko": "한밤",
     "preview_colors": [
-      "#fafaf5",
-      "#f5f2ed",
-      "#2d2934",
-      "#2d7a5c"
+      "#1a1a2e",
+      "#16213e",
+      "#e0e0e0",
+      "#4fc3f7"
     ]
   },
   "layout": "shell",
-  "theme_id": "paper"
+  "theme_id": "midnight"
 }
