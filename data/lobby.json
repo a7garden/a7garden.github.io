@@ -17,6 +17,10 @@
         "ko": "프로필",
         "en": "Profile"
       },
+      "description": {
+        "ko": "이 공간의 소개",
+        "en": "About"
+      },
       "lobby": {
         "enabled": true,
         "display_mode": "grid",
@@ -29,6 +33,10 @@
       "display_name": {
         "ko": "블로그",
         "en": "Blog"
+      },
+      "description": {
+        "ko": "글과 시리즈",
+        "en": "Writing & series"
       },
       "lobby": {
         "enabled": true,
@@ -43,6 +51,10 @@
         "ko": "프로젝트",
         "en": "Projects"
       },
+      "description": {
+        "ko": "작업 기록",
+        "en": "Project log"
+      },
       "lobby": {
         "enabled": true,
         "display_mode": "grid",
@@ -55,6 +67,10 @@
       "display_name": {
         "ko": "링크",
         "en": "Links"
+      },
+      "description": {
+        "ko": "모아 둔 링크",
+        "en": "Curated links"
       },
       "lobby": {
         "enabled": true,
