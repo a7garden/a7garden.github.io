@@ -63,23 +63,6 @@
       }
     },
     {
-      "id": "links",
-      "display_name": {
-        "ko": "링크",
-        "en": "Links"
-      },
-      "description": {
-        "ko": "모아 둔 링크",
-        "en": "Curated links"
-      },
-      "lobby": {
-        "enabled": true,
-        "display_mode": "grid",
-        "display_order": 3,
-        "style_params": {}
-      }
-    },
-    {
       "id": "movies",
       "display_name": {
         "ko": "영화",
