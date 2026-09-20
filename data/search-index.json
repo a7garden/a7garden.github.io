@@ -1,5 +1,13 @@
 [
   {
+    "id": "blog/ai가-투자-ai를-키우는-실험---첫-두-모델은-탈락했다",
+    "title": "AI가 투자 AI를 키우는 실험 — Laya를 고르고, 첫 두 세대를 탈락시켰다",
+    "body_preview": "# AI가 투자 AI를 키우는 실험 — Laya를 고르고, 첫 두 세대를 탈락시켰다투자를 판단하는 에이전트가 토큰 한도에 걸리면 어떻게 될까. 다음 충전까지 판단이 멈추는동안 시장은 계속 움직인다. 이 문제에서 FARM 금융투자부의 새 실험을 시작했다.에이전트는 투자 모델을 학습시키고 결과를 분석하는 연구자가 되고, 자식 모델은 로컬에서정해진 선택을 수행한…",
+    "type": "blog",
+    "url": "/blog/ai가-투자-ai를-키우는-실험---첫-두-모델은-탈락했다",
+    "published_at": "2026-09-20T13:33:39.367Z"
+  },
+  {
     "id": "blog/hello--blog",
     "title": "Hello, Blog",
     "body_preview": "The blog is live.This site is built as a static bundle with oxibuilder and deployed to GitHub Pages. Posts are written in Markdown; Korean and English versions are linked, so you can switch languages …",

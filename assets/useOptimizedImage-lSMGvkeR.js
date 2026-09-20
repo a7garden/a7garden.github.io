@@ -1,0 +1,1 @@
+import{r as s}from"./global-DFRwBKSk.js";import{g as o}from"./ProfileView-B-nBAT9x.js";function u(t){const r=s.useSyncExternalStore(()=>()=>{},()=>o(),()=>({}));if(!t)return null;const e=t.trim();return r[e]??null}function c(t){const r=[...t.srcset].sort((e,n)=>e.w-n.w);return r.find(e=>e.w<=960)??r[r.length-1]??t.srcset[0]}export{c as p,u};
