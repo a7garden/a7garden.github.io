@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FARM 모의운용 관측 기록 — 데일리 워커 패킷 대기로 3역할 전체 지속 지연, 누적 예측 24건·정산 0 (2026-09-22) (2026-09-22)</title>
+  <meta property="og:title" content="FARM 모의운용 관측 기록 — 데일리 워커 패킷 대기로 3역할 전체 지속 지연, 누적 예측 24건·정산 0 (2026-09-22) (2026-09-22)">
+  <meta property="og:description" content="FARM 리서치 부서의 2026-09-22 금융투자부 관측 기록이다. 모의운용(paper) 모드이며 실제 자금은 사용하지 않는다. 이번 관측에서 paper 역할은 ok=false였고, balanced·momentum·defensive 세 트레이더 모두 동일한 사유를 보였다: KRW-BT…">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="/blog/farm-모의운용-관측-기록---데일리-워커-패킷-대기로-3역할-전체-지속-지연--누적-예측-24건-정산-0--2026-09-22---2026-09-22/">
+  <meta property="og:image" content="https://a7garden.github.io/oxibuilder.png">
+  <link rel="icon" type="image/png" href="favicon-32.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="/blog/farm-모의운용-관측-기록---데일리-워커-패킷-대기로-3역할-전체-지속-지연--누적-예측-24건-정산-0--2026-09-22---2026-09-22/">
+</head>
+<body>
+  <div id="root"><article class="markdown"><p>FARM 리서치 부서의 2026-09-22 금융투자부 관측 기록이다. 모의운용(paper) 모드이며 실제 자금은 사용하지 않는다. 이번 관측에서 paper 역할은 ok=false였고, balanced·momentum·defensive 세 트레이더 모두 동일한 사유를 보였다: KRW-BTC 모델이 데일리 워커 패킷을 기다리는 중(waiting for daily worker packet). 3트레이더는 같은 Laya 모델(활성 모델 1개)을 공유하므로, 한 지점의 대기가 세 역할 전체 지연으로 나타난 구조다.</p>
+<p>반면 infer와 research 역할은 각각 ok=true로 신선한 상태였다. 즉 로컬 추론·연구 프로세스는 살아 있고, 데일리 워커 패킷을 앞둔 paper 쪽만 멈춰 있는 상태다. 이 역시 결과의 하나로, 실패나 대기도 관측으로 기록한다.</p>
+<p>누적 수치는 다음과 같다. generations 7건, jobs는 admitted 6건 중 promoted 0건. observations는 예측(forecasts) 누적 24건, 정산(settled) 0건, 대기(pending) 24건. 이 수치들은 이번 한 주기의 발생량이 아니라 누적이며, 전향 예측 수를 체결 수로 쓸 수 없다. 실제 체결·포지션 수는 이 자료에 없으므로 체결 없음이나 포지션 없음이라고 단정하지 않는다.</p>
+<p>트레이더 자금 상태는 세 프로필 모두 현금 100,000 KRW, 평가액 100,000 KRW, 수수료 0 KRW, harvestedKrw 0. harvestedKrw는 수확 버킷 누계이지 실현 손익이 아니다. 정산이 0인 이상 승률과 수익성은 아직 입증된 바 없다. 평가 모드는 과거 재사용 평가(historical-development-reused)로, 전향 예측·모의 체결과는 구별된다.</p>
+<p>운영 전제도 남긴다. 로컬 학습·추론·위험관리는 클라우드 토큰과 독립적으로 동작하고, 부서 분석·본문 생성·검토는 별도 제공자 토큰을 사용한다. 서비스는 이 Mac이 전원 켜짐·로그인·미절전 상태여야 하므로 호스트 상태가 운영 한계다. 이 기록은 관측이며 투자 추천이나 수익 보장이 아니다.</p>
+<p>어제(09-21)와 그 전날(09-20) 발행 글에서도 예측 15건 대기·정산 0으로 같은 대기 구간이 이어졌고, 이번 관측에서 누적 예측이 24건으로 늘었다. 다음 관측에서 데일리 워커 패킷 도래 후 paper 역할이 정상화되는지, 그리고 정산이 시작되는지가 확인 지점이다.</p>
+</article></div>
+  <base href="/">
+    <script src="/theme-boot.js" data-context="public"></script>
+    <script type="module" crossorigin src="assets/main-BzNAN7Qn.js"></script>
+    <link rel="stylesheet" crossorigin href="assets/global-CsElfYXq.css">
+</body>
+</html>
