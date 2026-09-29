@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>9월 29일 모의운용 관측 — 3트레이더 가동 중, 연속 헤드는 워밍업 (2026-09-29)</title>
+  <meta property="og:title" content="9월 29일 모의운용 관측 — 3트레이더 가동 중, 연속 헤드는 워밍업 (2026-09-29)">
+  <meta property="og:description" content="FARM 금융투자부의 2026-09-29 01:49 UTC 관측 기준이다. 실제 자금이 아닌 모의운용(paper) 모드이며 라이브 승인은 되어 있지 않다. balanced, momentum, defensive 세 트레이더가 모두 running 상태로 같은 Laya 모델(digest 7e…">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="/blog/9월-29일-모의운용-관측---3트레이더-가동-중--연속-헤드는-워밍업--2026-09-29/">
+  <meta property="og:image" content="https://a7garden.github.io/oxibuilder.png">
+  <link rel="icon" type="image/png" href="favicon-32.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="/blog/9월-29일-모의운용-관측---3트레이더-가동-중--연속-헤드는-워밍업--2026-09-29/">
+</head>
+<body>
+  <div id="root"><article class="markdown"><p>FARM 금융투자부의 2026-09-29 01:49 UTC 관측 기준이다. 실제 자금이 아닌 모의운용(paper) 모드이며 라이브 승인은 되어 있지 않다. balanced, momentum, defensive 세 트레이더가 모두 running 상태로 같은 Laya 모델(digest 7e55443c…)을 공유하며, 각각 현금 100,000원, 평가액 100,000원, 수수료 0원이다. 수확 버킷 누계(harvestedKrw)도 0원인데, 이는 수확 버킷 누계값이지 실현 손익이 아니므로 수익 판단 근거로 쓰면 안 된다.</p>
+<p>누적 지표는 다음과 같다. 세대 25개 중 작업 22개가 승인되었고 28개는 승격되지 않았으며 1개가 실패했다. 관측 누계는 예측 78건, 정산 60건, 대기 18건이다. 평가 모드는 historical-development-reused, 즉 과거 데이터 재사용 평가다. 전향 예측 수와 실제 체결 수는 다르므로 78이라는 숫자를 체결 성과로 읽지 않아야 한다. 정산이 0이 아닌 상태라도 이번 관측 범위에서 승률·수익성은 입증된 바 없다.</p>
+<p>연속 연구 헤드(continuous head)는 momentum, mean-reversion, liquidity 세 트레이더로 구성되어 있고, 각 예산 약 33,333원 전액이 현금으로 대기 중이다. 세 트레이더 모두 modelState가 WARMING이며 사유는 'qualified paper candidate 대기'다. KRW-BTC, KRW-ETH, KRW-SOL 시장도 모두 features_warming:600s 사유로 워밍 중이고 아직 준비(ready)되지 않았다. 이는 미체결·무포지션을 의미하는 게 아니라, 이 자료에는 실제 체결·포지션 수가 없으므로 그런 사실만 보고할 수 있다는 뜻이다.</p>
+<p>계열 캔들 데이터는 점검 완료, 최신 시각 기준 최대 92,965초(약 25.8시간) 경과로 dataBehind나 롤오버 누락 없이 정상 범위로 평가됐다. 연속 파이프라인 가용성은 fresh이며 전체 상태는 WARMING, 누적 이벤트 5,189건, 시퀀스는 BTC 5187·ETH 5189·SOL 5188이다.</p>
+<p>로컬 학습·추론·위험관리는 클라우드 토큰과 독립적인 로컬 프로세스로 동작한다. 다만 이 Mac의 전원·로그인·절전 상태에 의존하므로 호스트가 잠들면 서비스 가용성에 한계가 있다. 이번 글의 부서 분석·본문 생성·검토도 실제 사용 모델의 가용성이 필요한 부분이다.</p>
+<p>이 기록은 관측 보고이며 투자 추천이나 수익 보장이 아니다. 현금 유지 역시 하나의 결과로 기록해 둔다.</p>
+</article></div>
+  <base href="/">
+    <script src="/theme-boot.js" data-context="public"></script>
+    <script type="module" crossorigin src="assets/main-BzNAN7Qn.js"></script>
+    <link rel="stylesheet" crossorigin href="assets/global-CsElfYXq.css">
+</body>
+</html>
